@@ -1,0 +1,36 @@
+---
+description: Project context, stack, and phase scope — fill at bootstrap
+alwaysApply: true
+---
+
+# Project Context
+
+**Product name:** {{PROJECT_NAME}} — {{SCOPE_SUMMARY}}.
+
+## Stack (pinned — see docs/architecture/tech-stack.md)
+
+Fill during bootstrap. Example shape (replace with your pins):
+
+- Node **24**, pnpm **11**, Turborepo **2.x**
+- Primary app: `apps/{{PRIMARY_APP}}`
+- Shared packages under `packages/*`
+
+## Monorepo map
+
+- `apps/{{PRIMARY_APP}}` — primary client or API (update when apps are added)
+- `packages/config` — ESLint + TypeScript bases
+- `packages/*` — shared libraries
+
+## Phase 1 scope (implement)
+
+- _List features to implement in Phase 1_
+
+## Out of scope (document only)
+
+- _List deferred / document-only work_
+
+## Pin policy
+
+- Prefer stable releases; no pre-release deps unless explicitly needed
+- Single version source: `docs/architecture/tech-stack.md`
+- For Expo apps (if used): `npx expo install --fix` only

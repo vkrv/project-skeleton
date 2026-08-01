@@ -1,0 +1,24 @@
+---
+description: Ask clarifying questions before ambiguous implementation
+alwaysApply: true
+---
+
+# Clarifying Questions
+
+Ask before building when:
+
+- Requirements have multiple valid implementations with significant trade-offs
+- User intent is ambiguous (scope, UX, data model)
+- Feature touches security, privacy, or competitive fairness
+- Naming/branding decisions affect public API or schema
+
+## How to ask
+
+- Use structured questions with concrete options
+- Limit to 1–2 critical questions at a time
+- Propose a default if blocked, clearly labeled as assumption
+
+## Do not ask when
+
+- Answer is in docs, rules, or existing code conventions
+- Choice is standard for this stack (e.g. Zod at API boundaries)

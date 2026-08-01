@@ -1,0 +1,37 @@
+---
+description: Testing standards and harness — run tests to keep project healthy
+alwaysApply: true
+---
+
+# Testing Harness
+
+Tests are part of the quality gate. **Run `pnpm test` before considering work done.**
+
+## Stack
+
+- **Vitest** for shared packages and Node/web apps by default
+- Native clients: add Jest/Detox (or project-chosen runner) when the first mobile app needs a suite
+
+## When to add tests
+
+- New pure logic (validators, mappers, domain math) → unit test alongside code
+- New Zod API contracts in shared packages → schema tests
+- Bug fix → regression test when practical
+- New HTTP route → prefer testing extracted service logic; integration tests when a DB test harness exists
+
+## Commands
+
+```bash
+pnpm test          # all applicable packages
+pnpm check         # build + typecheck + lint + test
+```
+
+## CI
+
+GitHub Actions runs `pnpm test` on every push/PR. Do not merge with failing tests.
+
+## Agent checklist
+
+1. Add/update tests for changed behavior
+2. Run `pnpm test` locally
+3. Update `docs/architecture/testing.md` if strategy changes

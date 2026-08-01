@@ -1,0 +1,27 @@
+---
+description: Documentation and cross-reference maintenance
+alwaysApply: true
+---
+
+# Docs & Cross-References
+
+## INDEX is canonical
+
+Update `docs/INDEX.md` whenever adding or changing any doc.
+
+## Feature doc template
+
+Each `docs/features/*.md` must include:
+
+- **Status:** planned | in-progress | shipped
+- **Related:** schema tables, API routes, screens/clients, linked features
+- **Open questions:** items needing user input
+
+## Living plan
+
+- `PLAN.md` — short summary + link to roadmap
+- `docs/plan/ROADMAP.md` — phased checkboxes, updated as work progresses
+
+## Cross-link pattern
+
+Use relative markdown links. Example: feature doc → `../architecture/data-model.md` → schema package.

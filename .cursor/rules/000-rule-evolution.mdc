@@ -1,0 +1,40 @@
+---
+description: Self-evolving rules protocol — highest priority meta-rule
+alwaysApply: true
+---
+
+# Rule Evolution (MANDATORY)
+
+When a pattern emerges that should be a convention, **update the rules immediately**.
+
+## When to evolve
+
+- Same pattern in 2+ places or 2+ sessions
+- Bug caused by missing convention
+- User says "this should be a rule" or "always do X"
+- New package/app added to monorepo
+- Schema or API contract changes affect multiple apps
+- A reusable harness / tooling / docs convention improves (keep the harness self-improving)
+
+## How to evolve
+
+1. Add or update `.cursor/rules/*.mdc`
+2. Append to `docs/ai-harness/EVOLUTION-LOG.md` (date, trigger, rule, rationale)
+3. Update `docs/ai-harness/RULES-INDEX.md`
+4. Cross-link from `AGENTS.md` if project-wide
+5. This repo is the canonical template — when improving the harness from a product monorepo, **push product-agnostic changes here** so the next project benefits
+
+## Never skip
+
+- New feature → feature doc + `docs/INDEX.md` entry + ROADMAP checkbox
+- Version pin change → `docs/architecture/tech-stack.md` + EVOLUTION-LOG
+- Behavior change → add/update tests; run `pnpm test` (see `160-testing-harness.mdc`)
+
+## Harness self-improvement
+
+Treat tooling + AI rules + docs conventions as a living system:
+
+- Prefer improving a **core rule** or **profile** over one-off chat instructions
+- When a stack pack becomes a repeated need, add or update a file under `profiles/` and document in RULES-INDEX
+- Never invent product-specific examples into shared harness files meant for reuse
+- Commit/PR/docs messages must stay neutral — do not name products or repos that triggered the change

@@ -1,0 +1,21 @@
+{
+  "name": "{{SCOPE}}",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint --filter=!@{{SCOPE}}/config",
+    "typecheck": "turbo run typecheck --filter=!@{{SCOPE}}/config",
+    "test": "turbo run test --filter=!@{{SCOPE}}/config",
+    "check": "pnpm build && pnpm typecheck && pnpm lint && pnpm test",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "turbo": "2.10.4",
+    "typescript": "6.0.3"
+  }
+}

@@ -1,0 +1,27 @@
+---
+description: Drizzle ORM + hosted Postgres
+globs: "packages/db/**"
+alwaysApply: false
+---
+
+# Drizzle + Postgres
+
+- Schema lives in `packages/db/src/schema/` — single source of truth
+- Migrations live in `packages/db/drizzle/` — **only** migration path
+- Apply with project `db:generate` then `db:migrate` scripts (add at bootstrap)
+- **Hosted Postgres only** as the database — the app owns auth; do not use a vendor Auth product or PostgREST from clients as the primary API
+- **No RLS-as-auth** — authorization enforced in the API layer via app JWT (or equivalent)
+- Drizzle is **server-only** — clients talk to your HTTP API only
+
+## Workflow
+
+1. Edit `packages/db/src/schema/`
+2. Generate SQL migrations into `packages/db/drizzle/`
+3. Apply migrations against `DATABASE_URL`
+4. Verify migration history / connection health
+
+## Efficiency
+
+- Index for real query patterns (e.g. `user_id` + date)
+- Prefer batch writes and idempotent upserts where sync is involved
+- Avoid full-table nightly scans when incremental updates suffice

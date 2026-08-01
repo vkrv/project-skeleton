@@ -1,0 +1,44 @@
+---
+description: UI design — elevated surfaces, theme tokens, primitives
+globs: "apps/**/components/**"
+alwaysApply: false
+---
+
+# UI Design
+
+## Visual language
+
+- Elevated **surface cards** with theme shadow tokens — **no `borderWidth: 1` on cards**
+- Generous spacing from theme tokens (e.g. `spacing.md` for card padding)
+- Radius from tokens (`sm` / `md` / `lg`)
+- Full dark/light parity via shared theme package
+
+## Primitives
+
+Prefer a small shared UI kit (e.g. `SurfaceCard`, list rows, icon badges, filter chips) over one-off styled views. Document the kit in `docs/architecture/` when it exists.
+
+## Theme helpers
+
+- Tint icon wells with alpha helpers from the theme package
+- Apply card shadows via theme helpers, not ad-hoc multi-layer shadows
+
+## Anti-patterns
+
+```tsx
+// BAD — hard-coded color
+<View style={{ backgroundColor: '#1a1a1a' }} />
+
+// BAD — bordered card
+<View style={{ borderWidth: 1, borderColor: theme.colors.border, borderRadius: 12 }} />
+
+// GOOD — token-based surface primitive
+<SurfaceCard>...</SurfaceCard>
+```
+
+## Borders allowed on
+
+- Text inputs, outline buttons, hairline dividers only
+
+## Icons
+
+Lucide-first — see `150-images-and-icons.mdc`.

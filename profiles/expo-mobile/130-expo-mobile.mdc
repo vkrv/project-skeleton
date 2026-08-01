@@ -1,0 +1,23 @@
+---
+description: Expo mobile app conventions
+globs: "apps/mobile/**"
+alwaysApply: false
+---
+
+# Expo Mobile
+
+- Expo (pinned SDK in `docs/architecture/tech-stack.md`) + Expo Router file-based navigation
+- TanStack Query for server state; MMKV (or equivalent) for offline buffers + query cache persistence
+- Theme from shared theme tokens — no hard-coded colors
+- Auth tokens in secure storage (e.g. Keychain / Keystore) — never plain AsyncStorage for secrets
+- All data via your HTTP API — no direct database client on mobile
+
+## Offline-first patterns
+
+- **Network:** NetInfo → TanStack `onlineManager`; expose `useIsOnline()` (or equivalent) for UI
+- **Query cache:** `PersistQueryClientProvider` + MMKV persister; `networkMode: "offlineFirst"`; resume paused mutations on restore/reconnect
+- **Outbox:** durable local queue for mutations/sync payloads; oldest-first drain; prune stale entries
+- **Triggers:** foreground, periodic interval, reconnect (skip when offline)
+- **API errors:** distinguish transport failures vs HTTP API errors; use a short request timeout
+
+Adjust globs if the mobile app path is not `apps/mobile`.

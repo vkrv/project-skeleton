@@ -1,0 +1,22 @@
+---
+description: Images and icons — stubs and libraries only
+alwaysApply: true
+---
+
+# Images & Icons
+
+**No custom image assets** unless the user provides them or a feature doc explicitly approves generation/upload pipelines.
+
+## Allowed
+
+- **Lucide** (`lucide-react` / `lucide-react-native`) for icons
+- Platform vector icon sets where needed (e.g. `@expo/vector-icons`)
+- Generated avatar stubs: initials + deterministic background color
+- Placeholder blocks for missing images
+- Remote images from your own API/CDN when a feature doc defines the source
+
+## Not allowed (without user assets or documented pipeline)
+
+- Stock photos or custom PNG/SVG illustrations bundled in the app repo
+
+When assets are needed later, document in a feature doc and ask the user first.

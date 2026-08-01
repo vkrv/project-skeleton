@@ -1,0 +1,24 @@
+---
+description: TypeScript coding standards
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# TypeScript
+
+- Strict mode always on
+- Prefer `type` imports: `import type { Foo } from '...'`
+- Zod at API boundaries (request/response, env parsing)
+- No `any`; use `unknown` + narrowing
+- Prefix intentionally unused vars with `_`
+
+```typescript
+// BAD
+catch (e) {}
+
+// GOOD
+catch (error) {
+  logger.error('Failed', { error });
+  throw error;
+}
+```

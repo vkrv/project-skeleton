@@ -1,0 +1,27 @@
+---
+description: Fastify server API patterns
+globs: "apps/server/**"
+alwaysApply: false
+---
+
+# Server API
+
+- Fastify 5 + Zod route schemas via `fastify-type-provider-zod`
+- Auth: verify app-issued JWT in middleware; keep secrets in env (`AUTH_JWT_SECRET` or equivalent)
+- Keep routes thin — business logic in `services/`
+- Efficient DB access: select only needed columns; avoid N+1
+
+## Structure
+
+```
+apps/server/src/
+  routes/       # HTTP handlers + Zod schemas
+  services/     # Domain / persistence logic
+  plugins/      # Auth, error handling, etc.
+```
+
+## Contracts
+
+- Prefer shared Zod schemas in `packages/shared` (or equivalent) for request/response types used by clients
+- Validate env at startup with Zod
+- Document pagination and error shape in `docs/architecture/api.md`
