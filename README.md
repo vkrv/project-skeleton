@@ -6,10 +6,10 @@ Portable monorepo **tooling + AI harness + docs conventions**. Use **this reposi
 
 On GitHub: open this repository → **Use this template** → clone → open in Cursor.
 
-Or with the GitHub CLI (replace `OWNER/REPO` with this template’s slug):
+Or with the GitHub CLI:
 
 ```bash
-gh repo create my-new-app --template OWNER/REPO --private --clone
+gh repo create my-new-app --template vkrv/project-skeleton --private --clone
 cd my-new-app
 ```
 

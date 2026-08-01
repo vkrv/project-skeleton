@@ -1,6 +1,6 @@
 # Bootstrap — new project from this skeleton
 
-Create a repo from **this** GitHub template (`gh repo create my-new-app --template OWNER/REPO --clone`, using this repository’s slug), or copy this tree as a new repo root, then complete the checklist below before product work.
+Create a repo from this GitHub template (`gh repo create my-new-app --template vkrv/project-skeleton --clone`), or copy this tree as a new repo root, then complete the checklist below before product work.
 
 ## 1. Identity
 
