@@ -31,6 +31,8 @@ Fill during bootstrap. Example shape (replace with your pins):
 
 ## Pin policy
 
-- Prefer stable releases; no pre-release deps unless explicitly needed
+- Prefer the **latest stable** release compatible with the pinned SDK/runtime
+- Never downgrade a library to stay on an older runtime or architecture
+- For Expo apps (if used): `npx expo install --fix` first; if the SDK-bundled pin is known-broken or behind latest stable, bump and add `expo.install.exclude`
+- No pre-release deps unless explicitly needed
 - Single version source: `docs/architecture/tech-stack.md`
-- For Expo apps (if used): `npx expo install --fix` only

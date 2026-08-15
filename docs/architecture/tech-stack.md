@@ -22,6 +22,8 @@
 
 ## Pin policy
 
-- Prefer stable releases; avoid pre-releases unless explicitly required
-- Expo packages: `npx expo install --fix` only (when Expo profile is used)
+- Prefer the **latest stable** release compatible with the pinned SDK/runtime
+- Never downgrade a library to stay on an older runtime or architecture
+- Expo packages: `npx expo install --fix` first (when Expo profile is used); if the SDK pin is known-broken or behind latest stable, bump and add `expo.install.exclude`
+- No pre-releases unless explicitly required
 - Document every pin change in `docs/ai-harness/EVOLUTION-LOG.md`
