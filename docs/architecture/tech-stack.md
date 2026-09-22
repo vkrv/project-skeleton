@@ -17,7 +17,7 @@
 |-------|--------|---------|-------|
 | Primary app | _TBD_ | — | Fill at bootstrap |
 | API (optional) | Fastify | _pin when adopted_ | See `profiles/typescript-api` |
-| ORM (optional) | Drizzle | _pin when adopted_ | See `profiles/drizzle-postgres` |
+| ORM (optional) | Drizzle | _pin when adopted_ | See `profiles/drizzle-postgres` for recommended starting pins |
 | Mobile (optional) | Expo | _pin when adopted_ | See `profiles/expo-mobile` |
 
 ## Pin policy

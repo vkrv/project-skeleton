@@ -12,6 +12,7 @@ alwaysApply: false
 - **Hosted Postgres only** as the database — the app owns auth; do not use a vendor Auth product or PostgREST from clients as the primary API
 - **No RLS-as-auth** — authorization enforced in the API layer via app JWT (or equivalent)
 - Drizzle is **server-only** — clients talk to your HTTP API only
+- Starting pins: see this profile's `README.md` (orm / postgres.js / drizzle-kit); record chosen versions in `docs/architecture/tech-stack.md` when adopting
 
 ## Workflow
 
