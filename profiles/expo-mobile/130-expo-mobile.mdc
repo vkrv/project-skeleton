@@ -14,6 +14,17 @@ alwaysApply: false
 - Auth tokens in secure storage (e.g. Keychain / Keystore) — never plain AsyncStorage for secrets
 - All data via your HTTP API — no direct database client on mobile
 
+## Query first-load and errors
+
+- Show spinner / pending UI **only** while the query is pending **and** there is no cached data. Never treat `!data` alone as loading — persisted or previously fetched `data` is a valid first paint.
+- On `isError && !data`, show a root network/API error overlay (or a shared `QueryErrorView`) **and** a toast. Do not leave a blank screen.
+- Failed refetch with cached `data`: keep the cached UI (optional toast). Do not unmount into a full-screen spinner.
+
+## Metro / dev-client
+
+- Only connect **this** app's Metro to **this** native binary / dev client.
+- If port 8081 is already taken, start with `--port` (and point this native client at that packager). Do not attach to another app's packager on 8081.
+
 ## Offline-first patterns
 
 - **Network:** NetInfo → TanStack `onlineManager`; expose `useIsOnline()` (or equivalent) for UI
