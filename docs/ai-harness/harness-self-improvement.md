@@ -12,6 +12,7 @@ Always-on protocol lives in [AGENTS.md](../../AGENTS.md) (mandatory, including n
 | `CLAUDE.md` | Claude Code (`@AGENTS.md` import + Claude-only notes) |
 | `.cursor/rules/*.mdc` | Cursor |
 | `profiles/*` | not loaded until copied into `.cursor/rules/` |
+| `docs/plan/PLANS.md` | Agents, via the AGENTS.md ExecPlan trigger |
 | `.agents/skills/*/SKILL.md` | Cursor, Codex, GitHub Copilot (native). Claude Code via `.claude/skills` symlink |
 
 ## Prefer promoting patterns

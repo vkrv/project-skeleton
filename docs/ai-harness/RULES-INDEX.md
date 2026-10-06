@@ -6,8 +6,9 @@ Registry of always-on protocol, Cursor-scoped rules, and Agent Skills. Update wh
 
 | File | Loaded by | Apply | Description |
 |------|-----------|-------|-------------|
-| [AGENTS.md](../../AGENTS.md) | Cursor, Codex, GitHub Copilot, Gemini CLI, and other AGENTS.md clients; Claude Code via `CLAUDE.md` import | always | **Single source** of always-on protocol (project context, docs, testing, definition of done, rule evolution) |
+| [AGENTS.md](../../AGENTS.md) | Cursor, Codex, GitHub Copilot, Gemini CLI, and other AGENTS.md clients; Claude Code via `CLAUDE.md` import | always | **Single source** of always-on protocol (project context, docs, testing, definition of done, rule evolution, ExecPlan trigger) |
 | [CLAUDE.md](../../CLAUDE.md) | Claude Code | always | Imports AGENTS.md (`@AGENTS.md`); Claude-only notes only |
+| [docs/plan/PLANS.md](../plan/PLANS.md) | Agents, via the AGENTS.md ExecPlan trigger | when required | ExecPlan convention; copy [exec/_template.md](../plan/exec/_template.md) to `docs/plan/exec/YYYY-MM-DD-slug.md` |
 | `.cursor/rules/*.mdc` | Cursor | frontmatter (`alwaysApply` / `globs`) | Pointer to AGENTS.md plus glob-scoped (and copied profile) rules |
 | `profiles/*` | not loaded until copied into `.cursor/rules/` | — | Optional stack packs |
 | `.agents/skills/*/SKILL.md` | Cursor, Codex, GitHub Copilot (native). Claude Code via `.claude/skills` symlink | on demand | Task playbooks (open [Agent Skills](https://agentskills.io/specification) format) |

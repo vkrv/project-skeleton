@@ -9,7 +9,9 @@
  * Product mode fails if those placeholders remain. JSX/style object literals are ignored.
  *
  * Also checks Agent Skills under .agents/skills (frontmatter, slug, RULES-INDEX)
- * and that .claude/skills is a symlink to that folder.
+ * and that .claude/skills is a symlink to that folder. ExecPlan files under
+ * docs/plan/exec/ (except _template.md and README.md) must include every
+ * mandatory section heading from docs/plan/PLANS.md.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -382,6 +384,56 @@ function checkSkills() {
   }
 }
 
+const EXEC_PLAN_DIR = path.join(ROOT, "docs", "plan", "exec");
+const EXEC_PLAN_REQUIRED_HEADINGS = [
+  "Purpose / Big Picture",
+  "Progress",
+  "Surprises & Discoveries",
+  "Decision Log",
+  "Outcomes & Retrospective",
+  "Context and Orientation",
+  "Plan of Work",
+  "Concrete Steps",
+  "Validation and Acceptance",
+  "Idempotence and Recovery",
+  "Interfaces",
+];
+
+function headingTitle(line) {
+  const m = line.match(/^#{1,6}\s+(.+?)\s*$/);
+  return m ? m[1].replace(/[*_`]/g, "").trim() : null;
+}
+
+function headingCovers(title, required) {
+  const t = title.toLowerCase();
+  const r = required.toLowerCase();
+  return t === r || t.startsWith(`${r} `) || t.startsWith(`${r}/`) || t.startsWith(`${r}:`);
+}
+
+function checkExecPlans() {
+  if (!fs.existsSync(EXEC_PLAN_DIR)) return;
+  const files = walk(EXEC_PLAN_DIR, (abs, name) => {
+    if (!abs.endsWith(".md")) return false;
+    if (name === "README.md") return false;
+    if (name.startsWith("_")) return false;
+    return true;
+  });
+  for (const abs of files) {
+    const titles = read(abs)
+      .split("\n")
+      .map(headingTitle)
+      .filter(Boolean);
+    for (const required of EXEC_PLAN_REQUIRED_HEADINGS) {
+      const hit = titles.some((title) => headingCovers(title, required));
+      if (!hit) {
+        error(
+          `${rel(abs)}: missing mandatory ExecPlan heading "${required}"`,
+        );
+      }
+    }
+  }
+}
+
 function checkEvolutionLog() {
   const abs = path.join(ROOT, "docs", "ai-harness", "EVOLUTION-LOG.md");
   if (!fs.existsSync(abs)) {
@@ -409,6 +461,7 @@ checkLinks();
 checkAgentsSize();
 checkPlaceholders();
 checkEvolutionLog();
+checkExecPlans();
 
 for (const w of warnings) console.warn(`warn: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);

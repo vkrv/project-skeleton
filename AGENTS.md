@@ -39,7 +39,7 @@ Example shape:
 
 ## Monorepo map
 
-This table is the **canonical** agent-facing map. Layout, data flow, and pnpm 11 workspace settings: [docs/architecture/monorepo.md](docs/architecture/monorepo.md).
+This table is the **canonical** agent-facing map (update it when you add apps or packages). Layout, data flow, and pnpm 11 workspace settings: [docs/architecture/monorepo.md](docs/architecture/monorepo.md).
 
 | Path | Purpose |
 |------|---------|
@@ -47,12 +47,11 @@ This table is the **canonical** agent-facing map. Layout, data flow, and pnpm 11
 | `packages/config` | Shared ESLint + TypeScript config (`@repo/config`) |
 | `packages/*` | Shared libraries (add as needed) |
 
-Update this table when you add apps or packages.
-
 ## Documentation
 
 - [docs/INDEX.md](docs/INDEX.md) — master doc registry
 - [docs/plan/ROADMAP.md](docs/plan/ROADMAP.md) — phased delivery plan
+- [docs/plan/PLANS.md](docs/plan/PLANS.md) — ExecPlan convention (multi-step work)
 - [docs/architecture/tech-stack.md](docs/architecture/tech-stack.md) — pinned versions
 - [docs/architecture/monorepo.md](docs/architecture/monorepo.md) — layout and pnpm 11 workspace settings
 - [docs/architecture/env.md](docs/architecture/env.md) — environment variables
@@ -63,6 +62,10 @@ Update this table when you add apps or packages.
 
 **INDEX is canonical.** Update `docs/INDEX.md` whenever adding or changing any doc. Feature docs (`docs/features/*.md`) include **Status** (planned | in-progress | shipped), **Related**, and **Open questions**. Living plan: `PLAN.md` + `docs/plan/ROADMAP.md`. Cross-link with relative markdown links.
 
+### ExecPlans
+
+For multi-step features, significant refactors, or work that spans sessions or agents, write a living ExecPlan ([PLANS.md](docs/plan/PLANS.md)). Copy [docs/plan/exec/_template.md](docs/plan/exec/_template.md) to `docs/plan/exec/YYYY-MM-DD-slug.md` and keep every mandatory section current so a newcomer can finish from that file alone.
+
 ## Dev commands
 
 Run everything from the **repo root**:
@@ -72,7 +75,7 @@ pnpm install
 
 # Quality
 pnpm check         # harness + build + typecheck + lint + test
-pnpm check:harness # rules index, skills, links, placeholders, evolution log
+pnpm check:harness # rules index, skills, links, placeholders, evolution log, ExecPlans
 pnpm build
 pnpm lint
 pnpm typecheck
@@ -151,7 +154,7 @@ When a pattern emerges that should be a convention, **update the harness immedia
 
 ### How to evolve
 
-1. Always-on protocol → this file. Glob-scoped or stack-specific → add/update `.cursor/rules/*.mdc` (copy from `profiles/` when adopting a stack)
+1. Always-on protocol → this file. Glob-scoped or stack-specific → add/update `.cursor/rules/*.mdc` (copy from `profiles/` when adopting a stack). On-demand procedure → `.agents/skills/<slug>/SKILL.md`
 2. Append to `docs/ai-harness/EVOLUTION-LOG.md` (date, trigger, rule, rationale)
 3. Update `docs/ai-harness/RULES-INDEX.md` when guidance files change (including `.agents/skills`)
 4. Run `pnpm check:harness` and fix any errors
