@@ -16,7 +16,7 @@ Master registry of all {{PROJECT_NAME}} documentation. **Update this file when a
 | [architecture/tech-stack.md](architecture/tech-stack.md) | Pinned dependency versions |
 | [architecture/env.md](architecture/env.md) | Environment variables (names only) |
 | [architecture/monorepo.md](architecture/monorepo.md) | Repo layout and data flow |
-| [architecture/testing.md](architecture/testing.md) | Test suite and harness |
+| [architecture/testing.md](architecture/testing.md) | Test suite, per-package fast loop, quality gate |
 | [architecture/api.md](architecture/api.md) | HTTP API conventions (pagination, etc.) |
 
 ## Features
