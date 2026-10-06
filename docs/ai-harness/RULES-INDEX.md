@@ -11,7 +11,7 @@ Registry of active `.cursor/rules/*.mdc` files. Update when adding or removing r
 | `020-docs-and-crossrefs.mdc` | always | INDEX, feature docs, ROADMAP |
 | `030-ask-clarifying-questions.mdc` | always | Ask before ambiguous / high-stakes work |
 | `100-typescript.mdc` | `**/*.{ts,tsx}` | Strict TS + Zod boundaries |
-| `160-testing-harness.mdc` | always | Vitest + no-op-free `pnpm test` / `pnpm check` |
+| `160-testing-harness.mdc` | always | Vitest + no-op-free `pnpm test` / `pnpm check`; definition of done lives in AGENTS.md |
 
 ## Optional (from `profiles/`)
 
