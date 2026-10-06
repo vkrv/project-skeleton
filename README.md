@@ -36,7 +36,7 @@ Then follow [BOOTSTRAP.md](BOOTSTRAP.md): replace placeholders, choose profiles,
 | Token | Meaning |
 |-------|---------|
 | `{{PROJECT_NAME}}` | Display / product name |
-| `{{SCOPE}}` | npm scope without `@` (package becomes `@{{SCOPE}}/config`) |
+| `repo` / `@repo` | Default npm names (root `repo`, workspace `@repo/config`). Rename to the real scope at bootstrap. |
 | `{{PRIMARY_APP}}` | First app directory under `apps/` |
 | `{{SCOPE_SUMMARY}}` | One-line current-phase blurb in AGENTS.md |
 
