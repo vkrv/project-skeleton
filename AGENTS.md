@@ -11,7 +11,7 @@ Start every session here. **Product name:** {{PROJECT_NAME}}.
 | Path | Purpose |
 |------|---------|
 | `apps/{{PRIMARY_APP}}` | Primary client app (fill after creating first app) |
-| `packages/config` | Shared ESLint + TypeScript config (`@{{SCOPE}}/config`) |
+| `packages/config` | Shared ESLint + TypeScript config (`@repo/config`) |
 | `packages/*` | Shared libraries (add as needed) |
 
 Update this table when you add apps or packages.
