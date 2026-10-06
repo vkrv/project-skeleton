@@ -10,7 +10,15 @@ Tests are part of the quality gate. Follow the **definition of done in `AGENTS.m
 ## Stack
 
 - **Vitest** for shared packages and Node/web apps by default
-- Native clients: add Jest/Detox (or project-chosen runner) when the first mobile app needs a suite
+- When native / mobile app code exists, wire **real unit tests** for JS/TS logic (Vitest or the project-chosen runner). Full platform runners (device / simulator) can stay TBD / opt-in
+- Optional E2E is **labeled and opt-in in CI** — not a silent skip inside the required `pnpm test` job
+
+## No-ops are not a suite
+
+- `pnpm test` and each package `test` script must actually run tests when that package claims a suite
+- Do not ship placeholder scripts (`echo` / `exit 0`), empty configs that match zero files, or pipelines that always pass with nothing executed
+- Packages without a suite yet should **omit** the `test` script (Turbo skips missing tasks) rather than fake a pass
+- Adding a `test` script means adding at least one real assertion that can fail
 
 ## When to add tests
 

@@ -1,3 +1,23 @@
 packages:
   - "apps/*"
   - "packages/*"
+
+# pnpm 11 settings belong in THIS file — not root package.json#pnpm,
+# and not as misplaced .npmrc keys (only auth/registry stay in .npmrc).
+# See docs/architecture/monorepo.md.
+
+# allowBuilds: review dependency lifecycle scripts (postinstall / native compile).
+# Unlisted packages are blocked (strictDepBuilds defaults to true).
+# Do not set dangerouslyAllowAllBuilds. After the first real dependency that
+# needs a lifecycle script, add it here. pnpm may insert placeholder keys on
+# install — set each to true or false; do not approve the whole graph.
+#
+# allowBuilds:
+#   esbuild: true
+#   # workerd: true  # when Cloudflare Workers is adopted
+
+# minimumReleaseAge defaults to 1440 (1 day). Exclude only intentional newest
+# pins that must bypass the age gate — not a standing catalog of packages.
+#
+# minimumReleaseAgeExclude:
+#   - example-package@1.2.3

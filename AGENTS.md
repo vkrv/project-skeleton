@@ -21,6 +21,7 @@ Update this table when you add apps or packages.
 - [docs/INDEX.md](docs/INDEX.md) — master doc registry
 - [docs/plan/ROADMAP.md](docs/plan/ROADMAP.md) — phased delivery plan
 - [docs/architecture/tech-stack.md](docs/architecture/tech-stack.md) — pinned versions
+- [docs/architecture/monorepo.md](docs/architecture/monorepo.md) — layout and pnpm 11 workspace settings
 - [docs/architecture/env.md](docs/architecture/env.md) — environment variables
 
 ## Cursor rules

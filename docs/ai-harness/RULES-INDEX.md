@@ -11,7 +11,7 @@ Registry of active `.cursor/rules/*.mdc` files. Update when adding or removing r
 | `020-docs-and-crossrefs.mdc` | always | INDEX, feature docs, ROADMAP |
 | `030-ask-clarifying-questions.mdc` | always | Ask before ambiguous / high-stakes work |
 | `100-typescript.mdc` | `**/*.{ts,tsx}` | Strict TS + Zod boundaries |
-| `160-testing-harness.mdc` | always | Vitest; definition of done lives in AGENTS.md |
+| `160-testing-harness.mdc` | always | Vitest + no-op-free `pnpm test` / `pnpm check`; definition of done lives in AGENTS.md |
 
 ## Optional (from `profiles/`)
 
@@ -21,5 +21,12 @@ Copy into `.cursor/rules/` only when that stack is adopted. See [../../profiles/
 |---------|-----------|-------------|
 | `typescript-api` | `120-server-api.mdc` | Fastify + Zod API patterns |
 | `drizzle-postgres` | `110-drizzle-postgres.mdc` | Drizzle + hosted Postgres |
-| `expo-mobile` | `130-expo-mobile.mdc` | Expo Router / Query / offline |
+| `expo-mobile` | `130-expo-mobile.mdc` | Expo Router / Query first-load / offline / Metro isolation |
 | `ui-design` | `140-ui-design.mdc`, `150-images-and-icons.mdc` | Surfaces, tokens, Lucide-first |
+
+## Adopted profiles / product rules
+
+After bootstrap, move copied profiles here; keep Optional as catalog only.
+
+| File | Apply | Description |
+|------|-------|-------------|

@@ -39,7 +39,7 @@ Copy only what you need from [`profiles/`](profiles/). See [profiles/README.md](
 For each copied profile:
 
 - [ ] Copy `.mdc` into `.cursor/rules/`
-- [ ] Add a row to `docs/ai-harness/RULES-INDEX.md`
+- [ ] Append a row under **Adopted profiles / product rules** in `docs/ai-harness/RULES-INDEX.md` (keep Optional as catalog only)
 - [ ] Append a line to `docs/ai-harness/EVOLUTION-LOG.md`
 
 ## 4. First app & install
@@ -47,6 +47,7 @@ For each copied profile:
 - [ ] Create the first app under `apps/` (remove `apps/.gitkeep` when ready)
 - [ ] Wire its `package.json` to depend on `@repo/config` (after rename)
 - [ ] `pnpm install`
+- [ ] After the first real dependency that needs a lifecycle script (native compile / `postinstall`, e.g. esbuild), add it under `allowBuilds` in `pnpm-workspace.yaml` — see [docs/architecture/monorepo.md](docs/architecture/monorepo.md)
 - [ ] Confirm `pnpm check` passes (or adjust until empty packages are filtered)
 
 ## 5. First evolution log entry
