@@ -5,7 +5,7 @@
 ├── apps/                 # Deployable applications
 │   └── {{PRIMARY_APP}}/  # Primary app (create at bootstrap)
 ├── packages/
-│   └── config/           # Shared ESLint + TypeScript (@{{SCOPE}}/config)
+│   └── config/           # Shared ESLint + TypeScript (@repo/config)
 ├── docs/                 # Architecture, features, AI harness
 ├── profiles/             # Optional stack packs (copy rules when needed)
 ├── AGENTS.md             # Agent entry point
@@ -27,6 +27,6 @@ Clients talk only to **your** API. Do not give browsers or mobile apps direct da
 ## Adding packages
 
 1. Create under `apps/*` or `packages/*`
-2. Depend on `@{{SCOPE}}/config` for ESLint/TS bases
+2. Depend on `@repo/config` for ESLint/TS bases
 3. Update `AGENTS.md` monorepo map and `010-project-context.mdc`
 4. Append EVOLUTION-LOG
