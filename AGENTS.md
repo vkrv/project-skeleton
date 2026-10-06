@@ -39,7 +39,7 @@ Example shape:
 
 ## Monorepo map
 
-This table is the **canonical** agent-facing map. Layout, data flow, and pnpm 11 workspace settings: [docs/architecture/monorepo.md](docs/architecture/monorepo.md).
+This table is the **canonical** agent-facing map (update it when you add apps or packages). Layout, data flow, and pnpm 11 workspace settings: [docs/architecture/monorepo.md](docs/architecture/monorepo.md).
 
 | Path | Purpose |
 |------|---------|
@@ -47,12 +47,11 @@ This table is the **canonical** agent-facing map. Layout, data flow, and pnpm 11
 | `packages/config` | Shared ESLint + TypeScript config (`@repo/config`) |
 | `packages/*` | Shared libraries (add as needed) |
 
-Update this table when you add apps or packages.
-
 ## Documentation
 
 - [docs/INDEX.md](docs/INDEX.md) — master doc registry
 - [docs/plan/ROADMAP.md](docs/plan/ROADMAP.md) — phased delivery plan
+- [docs/plan/PLANS.md](docs/plan/PLANS.md) — ExecPlan convention (multi-step work)
 - [docs/architecture/tech-stack.md](docs/architecture/tech-stack.md) — pinned versions
 - [docs/architecture/monorepo.md](docs/architecture/monorepo.md) — layout and pnpm 11 workspace settings
 - [docs/architecture/env.md](docs/architecture/env.md) — environment variables
@@ -74,6 +73,10 @@ Living plan:
 - `PLAN.md` — short summary + link to roadmap
 - `docs/plan/ROADMAP.md` — phased checkboxes, updated as work progresses
 
+### ExecPlans
+
+For multi-step features, significant refactors, or work that spans sessions or agents, write a living ExecPlan. Copy [docs/plan/exec/_template.md](docs/plan/exec/_template.md) to `docs/plan/exec/YYYY-MM-DD-slug.md` and keep every mandatory section current; a newcomer must be able to finish from that file alone.
+
 Cross-link with relative markdown links. Example: feature doc → `../architecture/data-model.md` → schema package.
 
 ## Dev commands
@@ -85,7 +88,7 @@ pnpm install
 
 # Quality
 pnpm check         # harness + build + typecheck + lint + test
-pnpm check:harness # rules index, links, placeholders, evolution log
+pnpm check:harness # rules index, links, placeholders, evolution log, ExecPlans
 pnpm build
 pnpm lint
 pnpm typecheck

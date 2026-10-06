@@ -25,7 +25,7 @@ Then follow [BOOTSTRAP.md](BOOTSTRAP.md): replace placeholders, choose profiles,
 | `AGENTS.md` | Always-on agent protocol (tool-agnostic) |
 | `CLAUDE.md` | Claude Code import of AGENTS.md |
 | `.cursor/rules/` | Cursor pointer to AGENTS.md + glob-scoped rules (e.g. TypeScript) |
-| `docs/` | INDEX, ROADMAP, architecture stubs, EVOLUTION-LOG |
+| `docs/` | INDEX, ROADMAP, ExecPlans, architecture stubs, EVOLUTION-LOG |
 | `profiles/` | Optional stack packs (API, Drizzle, Expo, UI) — copy when needed |
 
 ## What's not included

@@ -2,6 +2,8 @@
 
 Living phased plan for **{{PROJECT_NAME}}**. Check boxes as work ships. Keep [INDEX.md](../INDEX.md) in sync when adding feature docs.
 
+This file is delivery checkboxes, not an implementation plan. Multi-step tasks use [PLANS.md](PLANS.md) and a file under [exec/](exec/README.md).
+
 ## Phase 0 — Bootstrap
 
 - [ ] Replace placeholders (`{{PROJECT_NAME}}`, `{{PRIMARY_APP}}`); rename `repo`/`@repo` to the real npm scope
