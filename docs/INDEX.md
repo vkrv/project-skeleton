@@ -8,6 +8,9 @@ Master registry of all {{PROJECT_NAME}} documentation. **Update this file when a
 |-----|-------------|
 | [PLAN.md](../PLAN.md) | Root plan summary |
 | [plan/ROADMAP.md](plan/ROADMAP.md) | Phased delivery roadmap |
+| [plan/PLANS.md](plan/PLANS.md) | ExecPlan convention for multi-step / multi-session work |
+| [plan/exec/README.md](plan/exec/README.md) | Per-task ExecPlan files (optional to commit) |
+| [plan/exec/_template.md](plan/exec/_template.md) | Copyable ExecPlan skeleton |
 
 ## Architecture
 
