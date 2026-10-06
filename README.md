@@ -20,6 +20,7 @@ Then follow [BOOTSTRAP.md](BOOTSTRAP.md): replace placeholders, choose profiles,
 | Path | Purpose |
 |------|---------|
 | Root tooling | pnpm workspace, Turborepo, Node 24, CI |
+| `scripts/` | Repo-root tooling (`pnpm check:harness`) |
 | `packages/config` | Shared ESLint + TypeScript bases |
 | `AGENTS.md` | Always-on agent protocol (tool-agnostic) |
 | `CLAUDE.md` | Claude Code import of AGENTS.md |
@@ -46,7 +47,8 @@ Then follow [BOOTSTRAP.md](BOOTSTRAP.md): replace placeholders, choose profiles,
 
 ```bash
 pnpm install
-pnpm check   # build + typecheck + lint + test
+pnpm check          # harness + build + typecheck + lint + test
+pnpm check:harness  # AI-harness self-check (no install required)
 pnpm dev
 ```
 

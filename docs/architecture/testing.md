@@ -19,10 +19,24 @@
 Full gate before calling work done (see [AGENTS.md](../../AGENTS.md) definition of done):
 
 ```bash
-pnpm check   # build + typecheck + lint + test
+pnpm check:harness  # deterministic AI-harness self-check (stdlib only)
+pnpm check          # harness + build + typecheck + lint + test
 ```
 
-CI (`.github/workflows/ci.yml`) runs install → build → typecheck → lint → test on every push/PR.
+CI (`.github/workflows/ci.yml`) runs the harness self-check, then install → build → typecheck → lint → test on every push/PR.
+
+### Harness self-check
+
+`scripts/check-harness.mjs` (also `pnpm check:harness`) verifies:
+
+- Every `.mdc` under `.cursor/rules/` and `profiles/` is listed in `docs/ai-harness/RULES-INDEX.md`, and every listed `.mdc` exists
+- `.mdc` frontmatter has a `description` and `globs` or `alwaysApply`
+- Relative markdown links in `AGENTS.md`, `BOOTSTRAP.md`, `README.md`, `docs/`, and `profiles/` resolve
+- `AGENTS.md` stays under 32 KiB (warning past ~200 lines)
+- Evolution-log dates are non-decreasing
+- When `HARNESS_MODE=product`, leftover bootstrap placeholders fail the gate. Default / template mode allows them. JSX style objects are ignored.
+
+Run it after editing rules, profiles, or harness docs. After bootstrap, set `HARNESS_MODE=product` in CI so leftover placeholders fail the gate.
 
 ## Fast loop (per package)
 

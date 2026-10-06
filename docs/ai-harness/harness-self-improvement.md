@@ -28,6 +28,8 @@ Always-on protocol lives in [AGENTS.md](../../AGENTS.md) (mandatory, including n
 - Skip EVOLUTION-LOG / RULES-INDEX when changing guidance files
 - Duplicate always-on protocol into Cursor `.mdc` files (keep a pointer, not a second copy)
 
+After changing rules, profiles, or harness docs, run `pnpm check:harness`.
+
 ## Neutrality
 
 Commits, PRs, and docs in this template must stay **product-agnostic**:

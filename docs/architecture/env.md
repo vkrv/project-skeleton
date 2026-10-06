@@ -15,4 +15,10 @@ Document **names only** here. Never commit secrets. Use `.env` locally (gitignor
 | `DATABASE_URL` | server / db | when using Postgres | Postgres connection string |
 | `AUTH_JWT_SECRET` | server | when using JWT auth | Signing secret for app-issued tokens |
 
+## Harness
+
+| Name | Used by | Required | Description |
+|------|---------|----------|-------------|
+| `HARNESS_MODE` | `pnpm check:harness` | no | Set to `product` after bootstrap so leftover placeholders fail. Omit (or `template`) in this skeleton. |
+
 Add rows as apps introduce new config. Do not put values in this doc.

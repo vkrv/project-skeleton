@@ -28,6 +28,8 @@ jobs:
           node-version: 24
           cache: pnpm
 
+      # Stdlib-only; does not need pnpm install.
+      - run: node scripts/check-harness.mjs
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: pnpm typecheck

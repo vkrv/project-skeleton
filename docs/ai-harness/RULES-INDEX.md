@@ -1,6 +1,6 @@
 # Agent guidance index
 
-Registry of always-on protocol and Cursor-scoped rules. Update when adding or removing guidance files.
+Registry of always-on protocol and Cursor-scoped rules. Update when adding or removing guidance files. Enforced by `pnpm check:harness` (every `.mdc` under `.cursor/rules/` and `profiles/` must be listed; every listed `.mdc` must exist).
 
 ## Where guidance lives
 

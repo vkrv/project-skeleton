@@ -10,6 +10,7 @@
 ├── profiles/             # Optional stack packs (copy rules when needed)
 ├── AGENTS.md             # Always-on agent protocol (canonical map + phase)
 ├── CLAUDE.md             # Claude Code import of AGENTS.md
+├── scripts/              # Repo-root tooling (harness self-check)
 ├── package.json          # Workspace root scripts
 ├── pnpm-workspace.yaml
 └── turbo.json

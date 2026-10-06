@@ -11,7 +11,8 @@
     "lint": "turbo run lint --filter=!@repo/config",
     "typecheck": "turbo run typecheck --filter=!@repo/config",
     "test": "turbo run test --filter=!@repo/config",
-    "check": "pnpm build && pnpm typecheck && pnpm lint && pnpm test",
+    "check:harness": "node scripts/check-harness.mjs",
+    "check": "pnpm check:harness && pnpm build && pnpm typecheck && pnpm lint && pnpm test",
     "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {

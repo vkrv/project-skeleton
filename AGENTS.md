@@ -84,7 +84,8 @@ Run everything from the **repo root**:
 pnpm install
 
 # Quality
-pnpm check      # build + typecheck + lint + test
+pnpm check         # harness + build + typecheck + lint + test
+pnpm check:harness # rules index, links, placeholders, evolution log
 pnpm build
 pnpm lint
 pnpm typecheck
@@ -166,13 +167,15 @@ When a pattern emerges that should be a convention, **update the harness immedia
 1. Always-on protocol → this file. Glob-scoped or stack-specific → add/update `.cursor/rules/*.mdc` (copy from `profiles/` when adopting a stack)
 2. Append to `docs/ai-harness/EVOLUTION-LOG.md` (date, trigger, rule, rationale)
 3. Update `docs/ai-harness/RULES-INDEX.md` when guidance files change
-4. This repo is the canonical template — when improving the harness from a product monorepo, **push product-agnostic changes here** so the next project benefits
+4. Run `pnpm check:harness` and fix any errors
+5. This repo is the canonical template — when improving the harness from a product monorepo, **push product-agnostic changes here** so the next project benefits
 
 ### Never skip
 
 - New feature → feature doc + `docs/INDEX.md` entry + ROADMAP checkbox
 - Version pin change → `docs/architecture/tech-stack.md` + EVOLUTION-LOG
 - Behavior change → add/update tests; satisfy **definition of done** (`pnpm check` + evidence)
+- Rule, profile, or harness-doc change → run `pnpm check:harness`
 
 ### Harness self-improvement
 
