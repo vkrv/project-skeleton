@@ -84,11 +84,15 @@ function mdcFiles() {
 
 function listedMdcNames(indexText) {
   const listed = new Set();
-  for (const m of indexText.matchAll(/`([^`\n]+\.mdc)`/g)) {
-    listed.add(m[1].trim().replace(/^\.\//, ""));
-  }
+  const consider = (raw) => {
+    const item = raw.trim().replace(/^\.\//, "").split("#")[0];
+    // Skip globs used as category labels (e.g. `.cursor/rules/*.mdc`).
+    if (!item || /[*?]/.test(item)) return;
+    listed.add(item);
+  };
+  for (const m of indexText.matchAll(/`([^`\n]+\.mdc)`/g)) consider(m[1]);
   for (const m of indexText.matchAll(/\[[^\]]*\]\(([^)\s]+\.mdc)/g)) {
-    listed.add(m[1].trim().replace(/^\.\//, "").split("#")[0]);
+    consider(m[1]);
   }
   return listed;
 }

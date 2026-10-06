@@ -29,4 +29,4 @@ One short paragraph.
 - …
 ```
 
-See also `.cursor/rules/020-docs-and-crossrefs.mdc`.
+See also the docs conventions in [AGENTS.md](../../AGENTS.md).

@@ -15,8 +15,8 @@ Master registry of all {{PROJECT_NAME}} documentation. **Update this file when a
 |-----|-------------|
 | [architecture/tech-stack.md](architecture/tech-stack.md) | Pinned dependency versions |
 | [architecture/env.md](architecture/env.md) | Environment variables (names only) |
-| [architecture/monorepo.md](architecture/monorepo.md) | Repo layout and data flow |
-| [architecture/testing.md](architecture/testing.md) | Test suite and harness |
+| [architecture/monorepo.md](architecture/monorepo.md) | Repo layout, data flow, and pnpm 11 workspace config |
+| [architecture/testing.md](architecture/testing.md) | Test suite, no-op policy, per-package fast loop, and quality gate |
 | [architecture/api.md](architecture/api.md) | HTTP API conventions (pagination, etc.) |
 
 ## Features
@@ -31,6 +31,8 @@ See [features/README.md](features/README.md) for the feature doc template.
 
 | Doc | Description |
 |-----|-------------|
-| [ai-harness/RULES-INDEX.md](ai-harness/RULES-INDEX.md) | Cursor rules registry |
+| [AGENTS.md](../AGENTS.md) | Always-on agent protocol (canonical map, phase, docs, testing, rule evolution) |
+| [CLAUDE.md](../CLAUDE.md) | Claude Code import of AGENTS.md |
+| [ai-harness/RULES-INDEX.md](ai-harness/RULES-INDEX.md) | Guidance file registry (which tools load what) |
 | [ai-harness/EVOLUTION-LOG.md](ai-harness/EVOLUTION-LOG.md) | Rule change history |
 | [ai-harness/harness-self-improvement.md](ai-harness/harness-self-improvement.md) | Keep rules/tooling/docs harness improving over time |

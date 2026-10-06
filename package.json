@@ -1,5 +1,5 @@
 {
-  "name": "{{SCOPE}}",
+  "name": "repo",
   "private": true,
   "packageManager": "pnpm@11.9.0",
   "engines": {
@@ -8,9 +8,9 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint --filter=!@{{SCOPE}}/config",
-    "typecheck": "turbo run typecheck --filter=!@{{SCOPE}}/config",
-    "test": "turbo run test --filter=!@{{SCOPE}}/config",
+    "lint": "turbo run lint --filter=!@repo/config",
+    "typecheck": "turbo run typecheck --filter=!@repo/config",
+    "test": "turbo run test --filter=!@repo/config",
     "check:harness": "node scripts/check-harness.mjs",
     "check": "pnpm check:harness && pnpm build && pnpm typecheck && pnpm lint && pnpm test",
     "clean": "turbo run clean && rm -rf node_modules"

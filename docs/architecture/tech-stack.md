@@ -7,7 +7,7 @@
 | Tool | Version | Notes |
 |------|---------|-------|
 | Node | 24.x (see `.node-version`) | LTS |
-| pnpm | 11.x | `packageManager` in root `package.json` |
+| pnpm | 11.x | `packageManager` in root `package.json`; workspace settings in `pnpm-workspace.yaml` (see [monorepo.md](monorepo.md)) |
 | Turborepo | 2.10.x | Monorepo task runner |
 | TypeScript | 6.x | Shared via workspace |
 
