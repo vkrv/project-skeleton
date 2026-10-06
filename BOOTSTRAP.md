@@ -5,7 +5,7 @@ Create a repo from this GitHub template (`gh repo create my-new-app --template v
 ## 1. Identity
 
 - [ ] Replace all `{{PROJECT_NAME}}` with the display product name
-- [ ] Replace all `{{SCOPE}}` with the npm scope (e.g. `acme` → `@acme/config`)
+- [ ] Rename root `repo` and `@repo/config` (including turbo `--filter` paths) to the real npm scope (e.g. `acme` → `@acme/config`)
 - [ ] Replace `{{PRIMARY_APP}}` with the first app folder name (e.g. `web`, `mobile`, `server`)
 - [ ] Fill `{{SCOPE_SUMMARY}}` in `AGENTS.md` (one-line phase description)
 - [ ] Update root `package.json` `name` and filter paths to use the real scope
@@ -13,7 +13,7 @@ Create a repo from this GitHub template (`gh repo create my-new-app --template v
 ```bash
 # Example find-replace from repo root after copy:
 # {{PROJECT_NAME}} → MyProduct
-# {{SCOPE}} → myproduct
+# repo / @repo → myproduct / @myproduct
 # {{PRIMARY_APP}} → web
 ```
 
@@ -39,14 +39,15 @@ Copy only what you need from [`profiles/`](profiles/). See [profiles/README.md](
 For each copied profile:
 
 - [ ] Copy `.mdc` into `.cursor/rules/`
-- [ ] Add a row to `docs/ai-harness/RULES-INDEX.md`
+- [ ] Append a row under **Adopted profiles / product rules** in `docs/ai-harness/RULES-INDEX.md` (keep Optional as catalog only)
 - [ ] Append a line to `docs/ai-harness/EVOLUTION-LOG.md`
 
 ## 4. First app & install
 
 - [ ] Create the first app under `apps/` (remove `apps/.gitkeep` when ready)
-- [ ] Wire its `package.json` to depend on `@{{SCOPE}}/config` (after rename)
+- [ ] Wire its `package.json` to depend on `@repo/config` (after rename)
 - [ ] `pnpm install`
+- [ ] After the first real dependency that needs a lifecycle script (native compile / `postinstall`, e.g. esbuild), add it under `allowBuilds` in `pnpm-workspace.yaml` — see [docs/architecture/monorepo.md](docs/architecture/monorepo.md)
 - [ ] Confirm `pnpm check` passes (or adjust until empty packages are filtered)
 
 ## 5. First evolution log entry

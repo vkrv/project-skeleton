@@ -39,12 +39,12 @@ Example shape:
 
 ## Monorepo map
 
-This table is the **canonical** agent-facing map. Architecture tree and data flow: [docs/architecture/monorepo.md](docs/architecture/monorepo.md).
+This table is the **canonical** agent-facing map. Layout, data flow, and pnpm 11 workspace settings: [docs/architecture/monorepo.md](docs/architecture/monorepo.md).
 
 | Path | Purpose |
 |------|---------|
 | `apps/{{PRIMARY_APP}}` | Primary client app (fill after creating first app) |
-| `packages/config` | Shared ESLint + TypeScript config (`@{{SCOPE}}/config`) |
+| `packages/config` | Shared ESLint + TypeScript config (`@repo/config`) |
 | `packages/*` | Shared libraries (add as needed) |
 
 Update this table when you add apps or packages.
@@ -54,6 +54,7 @@ Update this table when you add apps or packages.
 - [docs/INDEX.md](docs/INDEX.md) — master doc registry
 - [docs/plan/ROADMAP.md](docs/plan/ROADMAP.md) — phased delivery plan
 - [docs/architecture/tech-stack.md](docs/architecture/tech-stack.md) — pinned versions
+- [docs/architecture/monorepo.md](docs/architecture/monorepo.md) — layout and pnpm 11 workspace settings
 - [docs/architecture/env.md](docs/architecture/env.md) — environment variables
 - [docs/ai-harness/RULES-INDEX.md](docs/ai-harness/RULES-INDEX.md) — guidance file registry
 - [docs/ai-harness/EVOLUTION-LOG.md](docs/ai-harness/EVOLUTION-LOG.md) — convention change history
@@ -96,27 +97,39 @@ pnpm clean
 
 Add app-specific scripts (e.g. `dev:server`) only after creating those apps.
 
+## Definition of done
+
+Not done without evidence. Missing verification is not a successful fix.
+
+- Run `pnpm check` (or `pnpm turbo run test --filter <pkg>` while iterating). Report the command and its result — do not assert green without that output.
+- Add a regression test for every bug fix.
+- Update docs, [docs/INDEX.md](docs/INDEX.md), and [docs/plan/ROADMAP.md](docs/plan/ROADMAP.md) when relevant.
+- Append to [docs/ai-harness/EVOLUTION-LOG.md](docs/ai-harness/EVOLUTION-LOG.md) when a convention changed.
+- For UI changes, provide visual evidence (screenshot or recording of the affected flow).
+
 ## Testing
 
-Tests are part of the quality gate. **Run `pnpm test` before considering work done.**
+Follow **definition of done** above. Strategy and per-package fast-loop: [docs/architecture/testing.md](docs/architecture/testing.md).
 
 - **Vitest** for shared packages and Node/web apps by default
-- Native clients: add Jest/Detox (or project-chosen runner) when the first mobile app needs a suite
+- When native / mobile app code exists, wire **real unit tests** for JS/TS logic (Vitest or the project-chosen runner). Full platform runners (device / simulator) can stay TBD / opt-in
+- Optional E2E is **labeled and opt-in in CI** — not a silent skip inside the required `pnpm test` job
+
+No-ops are not a suite:
+
+- `pnpm test` and each package `test` script must actually run tests when that package claims a suite
+- Do not ship placeholder scripts (`echo` / `exit 0`), empty configs that match zero files, or pipelines that always pass with nothing executed
+- Packages without a suite yet should **omit** the `test` script (Turbo skips missing tasks) rather than fake a pass
+- Adding a `test` script means adding at least one real assertion that can fail
 
 When to add tests:
 
 - New pure logic (validators, mappers, domain math) → unit test alongside code
 - New Zod API contracts in shared packages → schema tests
-- Bug fix → regression test when practical
+- Bug fix → regression test (required)
 - New HTTP route → prefer testing extracted service logic; integration tests when a DB test harness exists
 
 CI runs `pnpm test` on every push/PR. Do not merge with failing tests.
-
-Agent checklist:
-
-1. Add/update tests for changed behavior
-2. Run `pnpm test` locally
-3. Update `docs/architecture/testing.md` if strategy changes
 
 ## Environment (names only — see env.md)
 
@@ -159,7 +172,7 @@ When a pattern emerges that should be a convention, **update the harness immedia
 
 - New feature → feature doc + `docs/INDEX.md` entry + ROADMAP checkbox
 - Version pin change → `docs/architecture/tech-stack.md` + EVOLUTION-LOG
-- Behavior change → add/update tests; run `pnpm test`
+- Behavior change → add/update tests; satisfy **definition of done** (`pnpm check` + evidence)
 
 ### Harness self-improvement
 

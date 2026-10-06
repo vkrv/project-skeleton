@@ -6,7 +6,7 @@ Registry of always-on protocol and Cursor-scoped rules. Update when adding or re
 
 | File | Loaded by | Apply | Description |
 |------|-----------|-------|-------------|
-| [AGENTS.md](../../AGENTS.md) | Cursor, Codex, GitHub Copilot, Gemini CLI, and other AGENTS.md clients; Claude Code via `CLAUDE.md` import | always | **Single source** of always-on protocol (project context, docs, testing, rule evolution) |
+| [AGENTS.md](../../AGENTS.md) | Cursor, Codex, GitHub Copilot, Gemini CLI, and other AGENTS.md clients; Claude Code via `CLAUDE.md` import | always | **Single source** of always-on protocol (project context, docs, testing, definition of done, rule evolution) |
 | [CLAUDE.md](../../CLAUDE.md) | Claude Code | always | Imports AGENTS.md (`@AGENTS.md`); Claude-only notes only |
 | `.cursor/rules/*.mdc` | Cursor | frontmatter (`alwaysApply` / `globs`) | Pointer to AGENTS.md plus glob-scoped (and copied profile) rules |
 | `profiles/*` | not loaded until copied into `.cursor/rules/` | — | Optional stack packs |
@@ -28,5 +28,12 @@ Copy into `.cursor/rules/` only when that stack is adopted. See [../../profiles/
 |---------|-----------|-------------|
 | `typescript-api` | `120-server-api.mdc` | Fastify + Zod API patterns |
 | `drizzle-postgres` | `110-drizzle-postgres.mdc` | Drizzle + hosted Postgres |
-| `expo-mobile` | `130-expo-mobile.mdc` | Expo Router / Query / offline |
+| `expo-mobile` | `130-expo-mobile.mdc` | Expo Router / Query first-load / offline / Metro isolation |
 | `ui-design` | `140-ui-design.mdc`, `150-images-and-icons.mdc` | Surfaces, tokens, Lucide-first |
+
+## Adopted profiles / product rules
+
+After bootstrap, move copied profiles here; keep Optional as catalog only.
+
+| File | Apply | Description |
+|------|-------|-------------|
