@@ -33,6 +33,7 @@ See [features/README.md](features/README.md) for the feature doc template.
 |-----|-------------|
 | [AGENTS.md](../AGENTS.md) | Always-on agent protocol (canonical map, phase, docs, testing, rule evolution) |
 | [CLAUDE.md](../CLAUDE.md) | Claude Code import of AGENTS.md |
-| [ai-harness/RULES-INDEX.md](ai-harness/RULES-INDEX.md) | Guidance file registry (which tools load what) |
+| [ai-harness/RULES-INDEX.md](ai-harness/RULES-INDEX.md) | Guidance file registry (which tools load what), including Agent Skills |
 | [ai-harness/EVOLUTION-LOG.md](ai-harness/EVOLUTION-LOG.md) | Rule change history |
 | [ai-harness/harness-self-improvement.md](ai-harness/harness-self-improvement.md) | Keep rules/tooling/docs harness improving over time |
+| [`.agents/skills/`](../.agents/skills/) | Cross-tool Agent Skills (`SKILL.md` playbooks); listed in RULES-INDEX |

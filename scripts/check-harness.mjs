@@ -7,6 +7,9 @@
  *
  * Default (template) mode allows bootstrap placeholders.
  * Product mode fails if those placeholders remain. JSX/style object literals are ignored.
+ *
+ * Also checks Agent Skills under .agents/skills (frontmatter, slug, RULES-INDEX)
+ * and that .claude/skills is a symlink to that folder.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -80,6 +83,23 @@ function mdcFiles() {
     ...walk(path.join(ROOT, ".cursor", "rules"), (abs) => abs.endsWith(".mdc")),
     ...walk(path.join(ROOT, "profiles"), (abs) => abs.endsWith(".mdc")),
   ];
+}
+
+function skillFiles() {
+  return walk(
+    path.join(ROOT, ".agents", "skills"),
+    (abs, name) => name === "SKILL.md",
+  );
+}
+
+function listedSkillPaths(indexText) {
+  const listed = new Set();
+  const re =
+    /\.agents\/skills\/([a-z0-9][a-z0-9-]*(?:\/[a-z0-9][a-z0-9-]*)*)/g;
+  for (const m of indexText.matchAll(re)) {
+    listed.add(m[1].replace(/\/SKILL\.md$/, "").replace(/\/$/, ""));
+  }
+  return listed;
 }
 
 function listedMdcNames(indexText) {
@@ -204,8 +224,10 @@ function checkLinks() {
     path.join(ROOT, "AGENTS.md"),
     path.join(ROOT, "BOOTSTRAP.md"),
     path.join(ROOT, "README.md"),
+    path.join(ROOT, "CLAUDE.md"),
     ...walk(path.join(ROOT, "docs"), (abs) => abs.endsWith(".md")),
     ...walk(path.join(ROOT, "profiles"), (abs) => abs.endsWith(".md") || abs.endsWith(".mdc")),
+    ...walk(path.join(ROOT, ".agents", "skills"), (abs) => abs.endsWith(".md")),
   ].filter((abs, i, arr) => fs.existsSync(abs) && arr.indexOf(abs) === i);
 
   for (const abs of files) {
@@ -273,6 +295,93 @@ function checkPlaceholders() {
   }
 }
 
+function checkSkills() {
+  const skillsRoot = path.join(ROOT, ".agents", "skills");
+  if (!fs.existsSync(skillsRoot)) {
+    error(".agents/skills/ is missing (canonical Agent Skills location)");
+  }
+
+  const claudeSkills = path.join(ROOT, ".claude", "skills");
+  let claudeStat;
+  try {
+    claudeStat = fs.lstatSync(claudeSkills);
+  } catch (err) {
+    if (err && err.code === "ENOENT") {
+      error(
+        ".claude/skills is missing (symlink to .agents/skills; Claude Code does not load .agents/skills)",
+      );
+    } else {
+      throw err;
+    }
+  }
+  if (claudeStat) {
+    if (!claudeStat.isSymbolicLink()) {
+      error(
+        ".claude/skills must be a symlink to .agents/skills (do not duplicate skill files)",
+      );
+    } else if (fs.existsSync(skillsRoot)) {
+      let target;
+      try {
+        target = fs.realpathSync(claudeSkills);
+      } catch {
+        error(".claude/skills symlink is broken; it must resolve to .agents/skills");
+        target = null;
+      }
+      if (target && target !== fs.realpathSync(skillsRoot)) {
+        error(".claude/skills must resolve to .agents/skills");
+      }
+    }
+  }
+
+  const indexAbs = path.join(ROOT, "docs", "ai-harness", "RULES-INDEX.md");
+  const indexText = fs.existsSync(indexAbs) ? read(indexAbs) : "";
+  const listed = listedSkillPaths(indexText);
+  const onDisk = new Set();
+
+  for (const abs of skillFiles()) {
+    const posix = rel(abs);
+    const slug = path.basename(path.dirname(abs));
+    const skillDir = rel(path.dirname(abs));
+    const fromAgents = skillDir.replace(/^\.agents\/skills\/?/, "");
+    onDisk.add(fromAgents || slug);
+
+    const fm = parseFrontmatter(read(abs));
+    if (!fm) {
+      error(`${posix}: missing YAML frontmatter`);
+      continue;
+    }
+    if (!fm.closed) {
+      error(`${posix}: unclosed YAML frontmatter`);
+      continue;
+    }
+    const name = fieldValue(fm.body, "name");
+    const description = fieldValue(fm.body, "description");
+    if (!name) {
+      error(`${posix}: frontmatter needs a non-empty name`);
+    }
+    if (!description) {
+      error(`${posix}: frontmatter needs a non-empty description`);
+    }
+    if (name && name !== slug) {
+      error(`${posix}: name "${name}" must match folder slug "${slug}"`);
+    }
+    if (
+      !listed.has(slug) &&
+      !listed.has(fromAgents) &&
+      !indexText.includes(`.agents/skills/${slug}`)
+    ) {
+      error(`${posix}: skill is not listed in docs/ai-harness/RULES-INDEX.md`);
+    }
+  }
+
+  for (const item of listed) {
+    const skillMd = path.join(ROOT, ".agents", "skills", item, "SKILL.md");
+    if (!fs.existsSync(skillMd) && !onDisk.has(item)) {
+      error(`RULES-INDEX lists missing skill: .agents/skills/${item}`);
+    }
+  }
+}
+
 function checkEvolutionLog() {
   const abs = path.join(ROOT, "docs", "ai-harness", "EVOLUTION-LOG.md");
   if (!fs.existsSync(abs)) {
@@ -295,6 +404,7 @@ function checkEvolutionLog() {
 
 checkRulesIndex();
 checkFrontmatter();
+checkSkills();
 checkLinks();
 checkAgentsSize();
 checkPlaceholders();
