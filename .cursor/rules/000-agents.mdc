@@ -1,0 +1,10 @@
+---
+description: Always-on protocol lives in AGENTS.md — read that file
+alwaysApply: true
+---
+
+# Follow AGENTS.md
+
+Read and follow [AGENTS.md](AGENTS.md) at the repository root. It is the **single source** of always-on guidance (project context, docs conventions, testing, rule evolution, clarifying questions).
+
+Do not duplicate that protocol in this directory. Glob-scoped rules here (e.g. `100-typescript.mdc`) and optional packs copied from `profiles/` still apply when their globs match.

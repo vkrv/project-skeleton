@@ -9,7 +9,7 @@ These folders are **not active** until you copy their rules into the new project
 3. Add a row for each rule in `docs/ai-harness/RULES-INDEX.md`.
 4. Append a line to `docs/ai-harness/EVOLUTION-LOG.md` (date, trigger: “Adopted X profile”, rule file, rationale).
 5. Update `docs/architecture/tech-stack.md` with real version pins.
-6. Adjust `AGENTS.md` / `010-project-context.mdc` monorepo map if the profile implies new packages (e.g. `packages/db`, `apps/server`).
+6. Adjust the `AGENTS.md` monorepo map (canonical) if the profile implies new packages (e.g. `packages/db`, `apps/server`).
 
 ## Profiles
 

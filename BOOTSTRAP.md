@@ -19,7 +19,7 @@ Create a repo from this GitHub template (`gh repo create my-new-app --template v
 
 ## 2. Docs & context
 
-- [ ] Fill [`.cursor/rules/010-project-context.mdc`](.cursor/rules/010-project-context.mdc) (name, stack, monorepo map, phase in/out of scope)
+- [ ] Fill [AGENTS.md](AGENTS.md) (name, stack, monorepo map, phase in/out of scope — canonical)
 - [ ] Fill [docs/architecture/tech-stack.md](docs/architecture/tech-stack.md) with real pinned versions
 - [ ] Document env var names in [docs/architecture/env.md](docs/architecture/env.md)
 - [ ] Sketch Phase 1 checkboxes in [docs/plan/ROADMAP.md](docs/plan/ROADMAP.md)
@@ -59,4 +59,4 @@ For each copied profile:
 
 ## Done
 
-Agents should start at [AGENTS.md](AGENTS.md). Product features go under `docs/features/` with INDEX + ROADMAP updates per `020-docs-and-crossrefs.mdc`.
+Agents should start at [AGENTS.md](AGENTS.md). Product features go under `docs/features/` with INDEX + ROADMAP updates per the docs conventions in AGENTS.md.
