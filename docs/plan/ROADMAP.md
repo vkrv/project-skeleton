@@ -5,7 +5,7 @@ Living phased plan for **{{PROJECT_NAME}}**. Check boxes as work ships. Keep [IN
 ## Phase 0 — Bootstrap
 
 - [ ] Replace placeholders (`{{PROJECT_NAME}}`, `{{PRIMARY_APP}}`); rename `repo`/`@repo` to the real npm scope
-- [ ] Fill tech-stack pins and project context rule
+- [ ] Fill tech-stack pins and AGENTS.md project context (phase, map)
 - [ ] Copy optional profiles from `profiles/` as needed
 - [ ] First app under `apps/` + `pnpm check` green
 

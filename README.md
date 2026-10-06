@@ -21,8 +21,10 @@ Then follow [BOOTSTRAP.md](BOOTSTRAP.md): replace placeholders, choose profiles,
 |------|---------|
 | Root tooling | pnpm workspace, Turborepo, Node 24, CI |
 | `packages/config` | Shared ESLint + TypeScript bases |
-| `.cursor/rules/` | Universal core rules (evolution, docs, TS, tests) |
-| `docs/` | INDEX, ROADMAP, architecture stubs, empty EVOLUTION-LOG |
+| `AGENTS.md` | Always-on agent protocol (tool-agnostic) |
+| `CLAUDE.md` | Claude Code import of AGENTS.md |
+| `.cursor/rules/` | Cursor pointer to AGENTS.md + glob-scoped rules (e.g. TypeScript) |
+| `docs/` | INDEX, ROADMAP, architecture stubs, EVOLUTION-LOG |
 | `profiles/` | Optional stack packs (API, Drizzle, Expo, UI) — copy when needed |
 
 ## What's not included
@@ -50,6 +52,6 @@ pnpm dev
 
 ## Self-improvement
 
-This harness is meant to evolve. See [docs/ai-harness/harness-self-improvement.md](docs/ai-harness/harness-self-improvement.md) and `000-rule-evolution.mdc`.
+This harness is meant to evolve. See [AGENTS.md](AGENTS.md) (rule evolution) and [docs/ai-harness/harness-self-improvement.md](docs/ai-harness/harness-self-improvement.md).
 
 This repository is the canonical template. When a product monorepo improves product-agnostic harness conventions, mirror them here so the next project starts better than the last.

@@ -1,21 +1,28 @@
-# Cursor rules index
+# Agent guidance index
 
-Registry of active `.cursor/rules/*.mdc` files. Update when adding or removing rules.
+Registry of always-on protocol and Cursor-scoped rules. Update when adding or removing guidance files.
+
+## Where guidance lives
+
+| File | Loaded by | Apply | Description |
+|------|-----------|-------|-------------|
+| [AGENTS.md](../../AGENTS.md) | Cursor, Codex, GitHub Copilot, Gemini CLI, and other AGENTS.md clients; Claude Code via `CLAUDE.md` import | always | **Single source** of always-on protocol (project context, docs, testing, definition of done, rule evolution) |
+| [CLAUDE.md](../../CLAUDE.md) | Claude Code | always | Imports AGENTS.md (`@AGENTS.md`); Claude-only notes only |
+| `.cursor/rules/*.mdc` | Cursor | frontmatter (`alwaysApply` / `globs`) | Pointer to AGENTS.md plus glob-scoped (and copied profile) rules |
+| `profiles/*` | not loaded until copied into `.cursor/rules/` | — | Optional stack packs |
+
+Always-on protocol belongs in `AGENTS.md`. Do not restate it in always-on `.mdc` files.
 
 ## Core (always present)
 
-| File | Apply | Description |
-|------|-------|-------------|
-| `000-rule-evolution.mdc` | always | Self-evolve rules + docs; keep harness improving; propagate agnostic fixes upstream if applicable |
-| `010-project-context.mdc` | always | Product name, stack, phase scope (fill at bootstrap) |
-| `020-docs-and-crossrefs.mdc` | always | INDEX, feature docs, ROADMAP |
-| `030-ask-clarifying-questions.mdc` | always | Ask before ambiguous / high-stakes work |
-| `100-typescript.mdc` | `**/*.{ts,tsx}` | Strict TS + Zod boundaries |
-| `160-testing-harness.mdc` | always | Vitest + no-op-free `pnpm test` / `pnpm check`; definition of done lives in AGENTS.md |
+| File | Apply | Loaded by | Description |
+|------|-------|-----------|-------------|
+| `000-agents.mdc` | always | Cursor | Pointer to `AGENTS.md`; do not duplicate protocol here |
+| `100-typescript.mdc` | `**/*.{ts,tsx}` | Cursor | Strict TS + Zod boundaries |
 
 ## Optional (from `profiles/`)
 
-Copy into `.cursor/rules/` only when that stack is adopted. See [../../profiles/README.md](../../profiles/README.md).
+Copy into `.cursor/rules/` only when that stack is adopted. See [../../profiles/README.md](../../profiles/README.md). Copied profile rules are loaded by **Cursor** (per each file's frontmatter).
 
 | Profile | Rule file | Description |
 |---------|-----------|-------------|

@@ -31,6 +31,8 @@ See [features/README.md](features/README.md) for the feature doc template.
 
 | Doc | Description |
 |-----|-------------|
-| [ai-harness/RULES-INDEX.md](ai-harness/RULES-INDEX.md) | Cursor rules registry |
+| [AGENTS.md](../AGENTS.md) | Always-on agent protocol (canonical map, phase, docs, testing, rule evolution) |
+| [CLAUDE.md](../CLAUDE.md) | Claude Code import of AGENTS.md |
+| [ai-harness/RULES-INDEX.md](ai-harness/RULES-INDEX.md) | Guidance file registry (which tools load what) |
 | [ai-harness/EVOLUTION-LOG.md](ai-harness/EVOLUTION-LOG.md) | Rule change history |
 | [ai-harness/harness-self-improvement.md](ai-harness/harness-self-improvement.md) | Keep rules/tooling/docs harness improving over time |

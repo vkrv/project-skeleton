@@ -8,11 +8,14 @@
 │   └── config/           # Shared ESLint + TypeScript (@repo/config)
 ├── docs/                 # Architecture, features, AI harness
 ├── profiles/             # Optional stack packs (copy rules when needed)
-├── AGENTS.md             # Agent entry point
+├── AGENTS.md             # Always-on agent protocol (canonical map + phase)
+├── CLAUDE.md             # Claude Code import of AGENTS.md
 ├── package.json          # Workspace root scripts
 ├── pnpm-workspace.yaml
 └── turbo.json
 ```
+
+The **canonical** agent-facing map (paths + purpose) lives in [AGENTS.md](../../AGENTS.md). This doc is the layout tree and data-flow notes — do not duplicate the map table here.
 
 ## Data flow (typical)
 
@@ -56,5 +59,5 @@ When you **intentionally** pin a version newer than the age gate, list that pack
 
 1. Create under `apps/*` or `packages/*`
 2. Depend on `@repo/config` for ESLint/TS bases
-3. Update `AGENTS.md` monorepo map and `010-project-context.mdc`
+3. Update the [AGENTS.md](../../AGENTS.md) monorepo map (canonical); update the tree above if layout changed
 4. Append EVOLUTION-LOG
