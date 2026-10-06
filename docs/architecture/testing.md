@@ -31,7 +31,9 @@ CI (`.github/workflows/ci.yml`) runs the harness self-check, then install → bu
 
 - Every `.mdc` under `.cursor/rules/` and `profiles/` is listed in `docs/ai-harness/RULES-INDEX.md`, and every listed `.mdc` exists
 - `.mdc` frontmatter has a `description` and `globs` or `alwaysApply`
-- Relative markdown links in `AGENTS.md`, `BOOTSTRAP.md`, `README.md`, `docs/`, and `profiles/` resolve
+- Every `.agents/skills/*/SKILL.md` has non-empty `name` and `description` frontmatter, `name` matches the folder slug, and the skill is listed in RULES-INDEX (`.agents/skills/<slug>` must appear)
+- `.claude/skills` is a symlink to `.agents/skills` (Claude Code does not load `.agents/skills`; do not duplicate skill files)
+- Relative markdown links in `AGENTS.md`, `BOOTSTRAP.md`, `README.md`, `docs/`, `profiles/`, and `.agents/skills/` resolve
 - `AGENTS.md` stays under 32 KiB (warning past ~200 lines)
 - Evolution-log dates are non-decreasing
 - ExecPlan files under `docs/plan/exec/` (except `_template.md` and `README.md`) include every mandatory section heading from [PLANS.md](../plan/PLANS.md)

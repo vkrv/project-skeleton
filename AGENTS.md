@@ -60,24 +60,11 @@ This table is the **canonical** agent-facing map (update it when you add apps or
 
 ### Docs conventions
 
-**INDEX is canonical.** Update `docs/INDEX.md` whenever adding or changing any doc.
-
-Each `docs/features/*.md` must include:
-
-- **Status:** planned | in-progress | shipped
-- **Related:** schema tables, API routes, screens/clients, linked features
-- **Open questions:** items needing user input
-
-Living plan:
-
-- `PLAN.md` — short summary + link to roadmap
-- `docs/plan/ROADMAP.md` — phased checkboxes, updated as work progresses
+**INDEX is canonical.** Update `docs/INDEX.md` whenever adding or changing any doc. Feature docs (`docs/features/*.md`) include **Status** (planned | in-progress | shipped), **Related**, and **Open questions**. Living plan: `PLAN.md` + `docs/plan/ROADMAP.md`. Cross-link with relative markdown links.
 
 ### ExecPlans
 
-For multi-step features, significant refactors, or work that spans sessions or agents, write a living ExecPlan. Copy [docs/plan/exec/_template.md](docs/plan/exec/_template.md) to `docs/plan/exec/YYYY-MM-DD-slug.md` and keep every mandatory section current; a newcomer must be able to finish from that file alone.
-
-Cross-link with relative markdown links. Example: feature doc → `../architecture/data-model.md` → schema package.
+For multi-step features, significant refactors, or work that spans sessions or agents, write a living ExecPlan ([PLANS.md](docs/plan/PLANS.md)). Copy [docs/plan/exec/_template.md](docs/plan/exec/_template.md) to `docs/plan/exec/YYYY-MM-DD-slug.md` and keep every mandatory section current so a newcomer can finish from that file alone.
 
 ## Dev commands
 
@@ -88,7 +75,7 @@ pnpm install
 
 # Quality
 pnpm check         # harness + build + typecheck + lint + test
-pnpm check:harness # rules index, links, placeholders, evolution log, ExecPlans
+pnpm check:harness # rules index, skills, links, placeholders, evolution log, ExecPlans
 pnpm build
 pnpm lint
 pnpm typecheck
@@ -167,9 +154,9 @@ When a pattern emerges that should be a convention, **update the harness immedia
 
 ### How to evolve
 
-1. Always-on protocol → this file. Glob-scoped or stack-specific → add/update `.cursor/rules/*.mdc` (copy from `profiles/` when adopting a stack)
+1. Always-on protocol → this file. Glob-scoped or stack-specific → add/update `.cursor/rules/*.mdc` (copy from `profiles/` when adopting a stack). On-demand procedure → `.agents/skills/<slug>/SKILL.md`
 2. Append to `docs/ai-harness/EVOLUTION-LOG.md` (date, trigger, rule, rationale)
-3. Update `docs/ai-harness/RULES-INDEX.md` when guidance files change
+3. Update `docs/ai-harness/RULES-INDEX.md` when guidance files change (including `.agents/skills`)
 4. Run `pnpm check:harness` and fix any errors
 5. This repo is the canonical template — when improving the harness from a product monorepo, **push product-agnostic changes here** so the next project benefits
 
@@ -178,18 +165,26 @@ When a pattern emerges that should be a convention, **update the harness immedia
 - New feature → feature doc + `docs/INDEX.md` entry + ROADMAP checkbox
 - Version pin change → `docs/architecture/tech-stack.md` + EVOLUTION-LOG
 - Behavior change → add/update tests; satisfy **definition of done** (`pnpm check` + evidence)
-- Rule, profile, or harness-doc change → run `pnpm check:harness`
+- Rule, profile, skill, or harness-doc change → run `pnpm check:harness`
 
 ### Harness self-improvement
 
 Treat tooling + AI rules + docs conventions as a living system:
 
-- Prefer improving **this file**, a **core glob-scoped rule**, or a **profile** over one-off chat instructions
+- Prefer improving **this file**, a **core glob-scoped rule**, a **profile**, or an **Agent Skill** over one-off chat instructions
 - When a stack pack becomes a repeated need, add or update a folder under `profiles/` and document in RULES-INDEX
 - Never invent product-specific examples into shared harness files meant for reuse
 - Commit/PR/docs messages must stay **neutral** — do not name products or repos that triggered the change
 
 Optional stack profiles live in `profiles/` — copy selected rules into `.cursor/rules/` during bootstrap.
+
+## Skills
+
+On-demand playbooks, not always-on protocol. When a task matches a skill `description`, follow that `SKILL.md`. Do not paste skill bodies into this file.
+
+- Canonical: [`.agents/skills/<slug>/SKILL.md`](.agents/skills/) ([Agent Skills](https://agentskills.io/specification))
+- Claude Code does not read `.agents/skills`; [`.claude/skills`](.claude/skills) is a symlink to that folder
+- Add a skill: folder slug = `name`, non-empty `description` (when to use it), list it in [RULES-INDEX](docs/ai-harness/RULES-INDEX.md), run `pnpm check:harness`
 
 ## Tool loading
 
@@ -198,3 +193,4 @@ Optional stack profiles live in `profiles/` — copy selected rules into `.curso
 | `AGENTS.md` (this file) | Cursor, Codex, GitHub Copilot, Gemini CLI, and other AGENTS.md clients |
 | `CLAUDE.md` | Claude Code (imports this file with `@AGENTS.md`) |
 | `.cursor/rules/*.mdc` | Cursor (one always-on pointer plus glob-scoped rules; see RULES-INDEX) |
+| `.agents/skills/*/SKILL.md` | Cursor, Codex, GitHub Copilot (native). Claude Code via `.claude/skills` symlink |

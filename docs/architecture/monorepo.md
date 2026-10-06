@@ -8,6 +8,8 @@
 │   └── config/           # Shared ESLint + TypeScript (@repo/config)
 ├── docs/                 # Architecture, features, AI harness
 ├── profiles/             # Optional stack packs (copy rules when needed)
+├── .agents/skills/       # Cross-tool Agent Skills (canonical)
+├── .claude/skills        # Symlink → .agents/skills (Claude Code)
 ├── AGENTS.md             # Always-on agent protocol (canonical map + phase)
 ├── CLAUDE.md             # Claude Code import of AGENTS.md
 ├── scripts/              # Repo-root tooling (harness self-check)
