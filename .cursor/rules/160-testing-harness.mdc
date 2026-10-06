@@ -23,15 +23,17 @@ Tests are part of the quality gate. **Run `pnpm test` before considering work do
 
 ```bash
 pnpm test          # all applicable packages
-pnpm check         # build + typecheck + lint + test
+pnpm check:harness # rules index, frontmatter, links, placeholders, evolution log
+pnpm check         # harness + build + typecheck + lint + test
 ```
 
 ## CI
 
-GitHub Actions runs `pnpm test` on every push/PR. Do not merge with failing tests.
+GitHub Actions runs the harness self-check plus build / typecheck / lint / test on every push/PR. Do not merge with failing tests.
 
 ## Agent checklist
 
 1. Add/update tests for changed behavior
 2. Run `pnpm test` locally
-3. Update `docs/architecture/testing.md` if strategy changes
+3. After editing rules, profiles, or harness docs, run `pnpm check:harness`
+4. Update `docs/architecture/testing.md` if strategy changes

@@ -20,9 +20,10 @@ Then follow [BOOTSTRAP.md](BOOTSTRAP.md): replace placeholders, choose profiles,
 | Path | Purpose |
 |------|---------|
 | Root tooling | pnpm workspace, Turborepo, Node 24, CI |
+| `scripts/` | Repo-root tooling (`pnpm check:harness`) |
 | `packages/config` | Shared ESLint + TypeScript bases |
 | `.cursor/rules/` | Universal core rules (evolution, docs, TS, tests) |
-| `docs/` | INDEX, ROADMAP, architecture stubs, empty EVOLUTION-LOG |
+| `docs/` | INDEX, ROADMAP, architecture stubs, EVOLUTION-LOG |
 | `profiles/` | Optional stack packs (API, Drizzle, Expo, UI) — copy when needed |
 
 ## What's not included
@@ -44,7 +45,8 @@ Then follow [BOOTSTRAP.md](BOOTSTRAP.md): replace placeholders, choose profiles,
 
 ```bash
 pnpm install
-pnpm check   # build + typecheck + lint + test
+pnpm check          # harness + build + typecheck + lint + test
+pnpm check:harness  # AI-harness self-check (no install required)
 pnpm dev
 ```
 

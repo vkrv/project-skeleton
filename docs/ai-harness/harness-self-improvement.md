@@ -16,6 +16,8 @@ This tree is a living harness. When conventions improve, update the rules/docs *
 - Encode one product’s domain into core rules or profiles meant for reuse
 - Skip EVOLUTION-LOG / RULES-INDEX when changing rules
 
+After changing rules, profiles, or harness docs, run `pnpm check:harness`.
+
 See `000-rule-evolution.mdc`.
 
 ## Neutrality

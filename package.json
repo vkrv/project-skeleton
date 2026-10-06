@@ -11,7 +11,8 @@
     "lint": "turbo run lint --filter=!@{{SCOPE}}/config",
     "typecheck": "turbo run typecheck --filter=!@{{SCOPE}}/config",
     "test": "turbo run test --filter=!@{{SCOPE}}/config",
-    "check": "pnpm build && pnpm typecheck && pnpm lint && pnpm test",
+    "check:harness": "node scripts/check-harness.mjs",
+    "check": "pnpm check:harness && pnpm build && pnpm typecheck && pnpm lint && pnpm test",
     "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {

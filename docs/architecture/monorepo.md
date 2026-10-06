@@ -9,6 +9,7 @@
 ├── docs/                 # Architecture, features, AI harness
 ├── profiles/             # Optional stack packs (copy rules when needed)
 ├── AGENTS.md             # Agent entry point
+├── scripts/              # Repo-root tooling (harness self-check)
 ├── package.json          # Workspace root scripts
 ├── pnpm-workspace.yaml
 └── turbo.json

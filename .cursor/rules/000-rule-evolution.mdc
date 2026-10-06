@@ -21,14 +21,16 @@ When a pattern emerges that should be a convention, **update the rules immediate
 1. Add or update `.cursor/rules/*.mdc`
 2. Append to `docs/ai-harness/EVOLUTION-LOG.md` (date, trigger, rule, rationale)
 3. Update `docs/ai-harness/RULES-INDEX.md`
-4. Cross-link from `AGENTS.md` if project-wide
-5. This repo is the canonical template — when improving the harness from a product monorepo, **push product-agnostic changes here** so the next project benefits
+4. Run `pnpm check:harness` and fix any errors
+5. Cross-link from `AGENTS.md` if project-wide
+6. This repo is the canonical template — when improving the harness from a product monorepo, **push product-agnostic changes here** so the next project benefits
 
 ## Never skip
 
 - New feature → feature doc + `docs/INDEX.md` entry + ROADMAP checkbox
 - Version pin change → `docs/architecture/tech-stack.md` + EVOLUTION-LOG
 - Behavior change → add/update tests; run `pnpm test` (see `160-testing-harness.mdc`)
+- Rule, profile, or harness-doc change → run `pnpm check:harness`
 
 ## Harness self-improvement
 

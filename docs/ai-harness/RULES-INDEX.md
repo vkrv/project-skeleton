@@ -1,6 +1,6 @@
 # Cursor rules index
 
-Registry of active `.cursor/rules/*.mdc` files. Update when adding or removing rules.
+Registry of `.mdc` files under `.cursor/rules/` and `profiles/`. Update when adding or removing rules. Enforced by `pnpm check:harness`.
 
 ## Core (always present)
 

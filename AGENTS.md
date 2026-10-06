@@ -39,7 +39,8 @@ Run everything from the **repo root**:
 pnpm install
 
 # Quality
-pnpm check      # build + typecheck + lint + test
+pnpm check         # harness + build + typecheck + lint + test
+pnpm check:harness # rules index, links, placeholders, evolution log
 pnpm build
 pnpm lint
 pnpm typecheck
@@ -58,4 +59,4 @@ Document env var **names** in `docs/architecture/env.md`. Never commit secrets.
 
 ## Rule evolution (summary)
 
-When patterns emerge, update `.cursor/rules/*.mdc` + EVOLUTION-LOG + RULES-INDEX. See `000-rule-evolution.mdc`.
+When patterns emerge, update `.cursor/rules/*.mdc` + EVOLUTION-LOG + RULES-INDEX, then run `pnpm check:harness`. See `000-rule-evolution.mdc`.

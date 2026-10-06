@@ -60,3 +60,5 @@ For each copied profile:
 ## Done
 
 Agents should start at [AGENTS.md](AGENTS.md). Product features go under `docs/features/` with INDEX + ROADMAP updates per `020-docs-and-crossrefs.mdc`.
+
+After placeholders are replaced, set `HARNESS_MODE=product` in CI so `pnpm check:harness` fails on leftovers.
