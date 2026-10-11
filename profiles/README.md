@@ -19,6 +19,7 @@ These folders are **not active** until you copy their rules into the new project
 | [drizzle-postgres](drizzle-postgres/) | `110-drizzle-postgres.mdc` | Drizzle schema/migrations + hosted Postgres |
 | [expo-mobile](expo-mobile/) | `130-expo-mobile.mdc` | Expo Router, TanStack Query first-load, offline, Metro isolation |
 | [ui-design](ui-design/) | `140-ui-design.mdc`, `150-images-and-icons.mdc` | Elevated surfaces, theme tokens, Lucide-first |
+| [git-submodule](git-submodule/) | `160-git-submodule.mdc` | Shared library or SDK as a git submodule (not vendored copies) |
 
 ## Notes
 

@@ -1,6 +1,6 @@
 ---
 name: adopt-profile
-description: Adopt an optional stack profile from profiles/ into .cursor/rules and record it under Adopted in RULES-INDEX. Use when enabling Fastify API, Drizzle/Postgres, Expo mobile, or UI-design rules, or when the user asks to copy a profile.
+description: Adopt an optional stack profile from profiles/ into .cursor/rules and record it under Adopted in RULES-INDEX. Use when enabling Fastify API, Drizzle/Postgres, Expo mobile, UI-design, or git-submodule rules, or when the user asks to copy a profile.
 ---
 
 # Adopt a stack profile
@@ -9,7 +9,7 @@ How-to: [profiles/README.md](../../../profiles/README.md). File catalog: [RULES-
 
 ## Steps
 
-1. Pick only the folders that match the stack (`typescript-api`, `drizzle-postgres`, `expo-mobile`, `ui-design`). Do not copy unused profiles “just in case.”
+1. Pick only the folders that match the stack (`typescript-api`, `drizzle-postgres`, `expo-mobile`, `ui-design`, `git-submodule`). Do not copy unused profiles “just in case.”
 2. Copy the profile `.mdc` file(s) into `.cursor/rules/` (keep filenames). Do not rewrite always-on protocol into them.
 3. Append a row under **Adopted profiles / product rules** in RULES-INDEX. Leave the Optional table as the catalog.
 4. Append [EVOLUTION-LOG.md](../../../docs/ai-harness/EVOLUTION-LOG.md): date, trigger “Adopted \<profile\> profile”, rule file, rationale. Dates must be non-decreasing.

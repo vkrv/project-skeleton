@@ -40,3 +40,4 @@ See [features/README.md](features/README.md) for the feature doc template.
 | [ai-harness/EVOLUTION-LOG.md](ai-harness/EVOLUTION-LOG.md) | Rule change history |
 | [ai-harness/harness-self-improvement.md](ai-harness/harness-self-improvement.md) | Keep rules/tooling/docs harness improving over time |
 | [`.agents/skills/`](../.agents/skills/) | Cross-tool Agent Skills (`SKILL.md` playbooks); listed in RULES-INDEX |
+| [profiles/README.md](../profiles/README.md) | Optional stack packs (copy when adopted); `git-submodule` is opt-in, not core |

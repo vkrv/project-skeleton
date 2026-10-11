@@ -35,6 +35,7 @@ Copy only what you need from [`profiles/`](profiles/). See [profiles/README.md](
 | `drizzle-postgres` | Drizzle ORM + hosted Postgres |
 | `expo-mobile` | Expo / React Native client |
 | `ui-design` | Theme tokens, surface cards, Lucide-first icons |
+| `git-submodule` | Shared library or SDK consumed as a git submodule |
 
 For each copied profile:
 

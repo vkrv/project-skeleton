@@ -56,6 +56,7 @@ Copy into `.cursor/rules/` only when that stack is adopted. See [../../profiles/
 | `drizzle-postgres` | `110-drizzle-postgres.mdc` | Drizzle + hosted Postgres |
 | `expo-mobile` | `130-expo-mobile.mdc` | Expo Router / Query first-load / offline / Metro isolation |
 | `ui-design` | `140-ui-design.mdc`, `150-images-and-icons.mdc` | Surfaces, tokens, Lucide-first |
+| `git-submodule` | `160-git-submodule.mdc` | Shared library/SDK git submodule (single copy, pointer bump, CI checkout) |
 
 ## Adopted profiles / product rules
 
