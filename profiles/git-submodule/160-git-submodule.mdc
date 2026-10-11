@@ -1,0 +1,60 @@
+---
+description: Git submodule — shared library or SDK checkout
+globs: "{{SUBMODULE_PATH}}/**"
+alwaysApply: false
+---
+
+# Git submodule
+
+Replace `{{SUBMODULE_PATH}}` in this file's `globs` with the real checkout path when adopting (ALL-CAPS token, same convention as `{{PRIMARY_APP}}`).
+
+## Single copy
+
+- Edit that library or SDK **only** inside `{{SUBMODULE_PATH}}`.
+- Do not copy, vendor, or duplicate its sources elsewhere in the monorepo.
+- Depend on the submodule checkout (workspace package, path, or its build output) — not a second tree of the same code.
+
+## Change flow
+
+1. Commit and **push in the submodule's upstream** first.
+2. In the **parent** repo, bump the recorded submodule commit (`git add {{SUBMODULE_PATH}}`) in its **own** clearly described commit (new SHA + why). Do not mix the pointer bump with unrelated parent changes.
+3. Rerun any dependent **installs** or **native / codegen** steps in the parent so consumers pick up the new tree.
+
+Do not leave the submodule dirty as a substitute for an upstream push.
+
+## Remove or move
+
+If you remove or relocate submodule code (path change, deinit, or replacement), clean **build artifacts and caches** that still reference the old path (Turbo/`dist`/`build`, installer links, native derived data, codegen output). Update `globs`, workspace globs, CI paths, and docs — or drop this profile if the submodule is gone.
+
+## CI checkout
+
+The skeleton workflow uses `actions/checkout@v7`. Check out submodules recursively:
+
+```yaml
+- uses: actions/checkout@v7
+  with:
+    submodules: recursive
+```
+
+**Private submodules:** `${{ github.token }}` (`GITHUB_TOKEN`) is scoped to the workflow's repository and **cannot** clone a private submodule in another repository. Pass a PAT or GitHub App token with read access to every private submodule repo:
+
+```yaml
+- uses: actions/checkout@v7
+  with:
+    submodules: recursive
+    token: ${{ secrets.GH_PAT }}
+```
+
+Public submodules can use the default token. For SSH submodule URLs, set `ssh-key` (otherwise `git@github.com:` is rewritten to HTTPS). Prefer a least-privilege token stored as a repository secret.
+
+## pnpm workspace
+
+**Include as a workspace package** when the submodule is a JS/TS package this monorepo should install, typecheck, lint, test, or build via Turbo. Add its path to `pnpm-workspace.yaml` `packages:` (for example `"{{SUBMODULE_PATH}}"`). Depend on it with `workspace:` from apps/packages.
+
+**Leave it out of the workspace** when it is native-only, a prebuilt artifact producer, or an independent install graph that should not hoist into the parent. Consume it via path, generated output, or a published package — still without copying sources.
+
+### Lockfile
+
+- Parent `pnpm-lock.yaml` is canonical for workspace resolution. After a pointer bump, run `pnpm install` at the **parent** root so the parent lockfile matches the new submodule `package.json` (commit lockfile changes in the parent when they occur).
+- The submodule's **own** lockfile belongs to upstream. Change it in the upstream repo first; do not rewrite it from the parent as a side effect of a pointer bump.
+- If the submodule **is** a workspace package, do not treat a nested lockfile as the parent's source of truth (pnpm 11 resolves workspace deps from the root lockfile). If it is **not** a workspace package, leave its lockfile untouched in parent commits except via the gitlink SHA.
