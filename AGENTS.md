@@ -94,8 +94,8 @@ Not done without evidence. Missing verification is not a successful fix.
 
 - Run `pnpm check` (or `pnpm turbo run test --filter <pkg>` while iterating). Report the command and its result — do not assert green without that output.
 - Add a regression test for every bug fix.
-- Update docs, [docs/INDEX.md](docs/INDEX.md), and [docs/plan/ROADMAP.md](docs/plan/ROADMAP.md) when relevant.
-- Append to [docs/ai-harness/EVOLUTION-LOG.md](docs/ai-harness/EVOLUTION-LOG.md) when a convention changed.
+- Mirrored logic (TypeScript + native, server + client, worker + API) must land in the same commit or PR, with the same regression test in each implementation. One-sided landings are not allowed; if a side cannot change yet, record a tracked follow-up.
+- Update docs, [docs/INDEX.md](docs/INDEX.md), and [docs/plan/ROADMAP.md](docs/plan/ROADMAP.md) when relevant; append [EVOLUTION-LOG.md](docs/ai-harness/EVOLUTION-LOG.md) when a convention changed.
 - For UI changes, provide visual evidence (screenshot or recording of the affected flow).
 
 ## Testing
