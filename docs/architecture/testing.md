@@ -67,4 +67,8 @@ Add a row when a package gains a `test` script.
 - Service-layer behavior for HTTP routes (prefer over full HTTP integration until a DB harness exists)
 - Regression tests for every bug fix
 
+## Parity across implementations
+
+When the same logic exists in more than one implementation — for example a TypeScript helper and a native port, server and client validation, or a worker and an API handler — a change must update every implementation in the same commit or PR, with the same regression test in each. Landing one side and leaving the others is not allowed. If one side truly cannot change yet, record that gap as a tracked follow-up (issue, ROADMAP item, or ExecPlan open question) instead of shipping a silent split.
+
 Update this doc when the testing strategy changes.
