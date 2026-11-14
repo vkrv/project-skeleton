@@ -16,3 +16,4 @@ Append-only history of harness / convention changes.
 | 2026-10-11 | Same logic lived in more than one implementation | AGENTS.md, testing.md, verify-done skill | Require same-PR updates and matching regression tests across mirrored implementations; untracked one-sided landings are not allowed |
 | 2026-10-11 | Opt-in git-submodule profile | profiles/git-submodule, RULES-INDEX | Optional pack for consuming a shared library or SDK as a git submodule; keep out of core |
 | 2026-11-14 | Evolution log mixed product notes with harness changes | MEMORY.md, memory/*, AGENTS.md, check-harness.mjs | Split standing project memory (bugs, design, functionality) from harness evolution; lint newest-first category files |
+| 2026-11-14 | Product-mode placeholder gate could not be enabled | check-harness.mjs, BOOTSTRAP.md, testing.md, adopt-profile | Skip `profiles/` in product-mode placeholder scan (unadopted packs stay a catalog; adopted copies in `.cursor/rules/` remain gated) |

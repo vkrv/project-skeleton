@@ -4,9 +4,13 @@
  *
  *   node scripts/check-harness.mjs
  *   HARNESS_MODE=product node scripts/check-harness.mjs
+ *   node scripts/check-harness.mjs --self-test
  *
  * Default (template) mode allows bootstrap placeholders.
- * Product mode fails if those placeholders remain. JSX/style object literals are ignored.
+ * Product mode fails if those placeholders remain. Unadopted packs under
+ * `profiles/` are skipped (catalog); adopted copies in `.cursor/rules/` are
+ * still scanned. ALL-CAPS `{{TOKEN}}` only: JSX/style object literals and
+ * GitHub Actions `${{ }}` expressions are ignored.
  *
  * Also checks Agent Skills under .agents/skills (frontmatter, slug, RULES-INDEX)
  * and that .claude/skills is a symlink to that folder. ExecPlan files under
@@ -282,24 +286,129 @@ function checkAgentsSize() {
   }
 }
 
+function skipProductPlaceholderPath(posix) {
+  if (posix === "scripts/check-harness.mjs") return true;
+  // Unadopted packs are a catalog. adopt-profile copies `.mdc` files into
+  // `.cursor/rules/` (same filenames); those copies stay in the scan.
+  if (posix === "profiles" || posix.startsWith("profiles/")) return true;
+  return false;
+}
+
+function matchBootstrapPlaceholders(text) {
+  // ALL-CAPS bootstrap placeholders only. JSX/style `{ … }` / `{{ mt: 2 }}`
+  // and GitHub Actions `${{ github.token }}` / `${{ secrets.X }}` do not match
+  // (`{{` followed by A-Z then only A-Z, digits, underscore).
+  return text.match(/\{\{[A-Z][A-Z0-9_]*\}\}/g);
+}
+
 function checkPlaceholders() {
   if (MODE !== "product") return;
   const files = walk(ROOT, (abs) => {
+    const posix = rel(abs);
     const ext = path.extname(abs);
     if (!PLACEHOLDER_EXT.has(ext)) return false;
-    if (rel(abs) === "scripts/check-harness.mjs") return false;
+    if (skipProductPlaceholderPath(posix)) return false;
     return true;
   });
-  // ALL-CAPS bootstrap placeholders only; ignore JSX/style object literals.
-  const token = /\{\{[A-Z][A-Z0-9_]*\}\}/g;
   for (const abs of files) {
-    const hits = read(abs).match(token);
+    const hits = matchBootstrapPlaceholders(read(abs));
     if (!hits) continue;
     const uniq = [...new Set(hits)];
     error(
       `${rel(abs)}: leftover placeholder(s) in product mode: ${uniq.join(", ")}`,
     );
   }
+}
+
+function selfTestPlaceholders() {
+  const failures = [];
+  const fail = (msg) => failures.push(msg);
+
+  if (
+    !skipProductPlaceholderPath("profiles/git-submodule/160-git-submodule.mdc")
+  ) {
+    fail("profiles/*.mdc catalog paths must be skipped");
+  }
+  if (!skipProductPlaceholderPath("profiles/git-submodule/README.md")) {
+    fail("profiles/** README catalog paths must be skipped");
+  }
+  if (skipProductPlaceholderPath("AGENTS.md")) {
+    fail("core files must still be scanned");
+  }
+  if (skipProductPlaceholderPath(".cursor/rules/160-git-submodule.mdc")) {
+    fail("adopted copies in .cursor/rules/ must still be scanned");
+  }
+  if (skipProductPlaceholderPath("docs/architecture/testing.md")) {
+    fail("docs outside profiles/ must still be scanned");
+  }
+
+  const ignored = [
+    "token: ${{ secrets.GH_PAT }}",
+    "${{ github.token }}",
+    "const style = { color: 'red' };",
+    "<Box sx={{ mt: 2 }} />",
+  ];
+  for (const sample of ignored) {
+    const hits = matchBootstrapPlaceholders(sample);
+    if (hits) {
+      fail(`false positive ${hits.join(", ")} in ${JSON.stringify(sample)}`);
+    }
+  }
+
+  const leftover = "Product {{PROJECT_NAME}} app {{PRIMARY_APP}}";
+  const leftoverHits = matchBootstrapPlaceholders(leftover) ?? [];
+  if (
+    !leftoverHits.includes("{{PROJECT_NAME}}") ||
+    !leftoverHits.includes("{{PRIMARY_APP}}")
+  ) {
+    fail("ALL-CAPS bootstrap tokens in core text must still match");
+  }
+
+  const submodule = path.join(
+    ROOT,
+    "profiles",
+    "git-submodule",
+    "160-git-submodule.mdc",
+  );
+  if (fs.existsSync(submodule)) {
+    const posix = rel(submodule);
+    if (!skipProductPlaceholderPath(posix)) {
+      fail(`${posix} must be skipped as unadopted catalog`);
+    }
+    const hits = matchBootstrapPlaceholders(read(submodule)) ?? [];
+    if (hits.length === 0) {
+      fail(`${posix} is the catalog fixture and should still contain pack tokens`);
+    }
+  }
+
+  const profileDir = path.join(ROOT, "profiles");
+  if (fs.existsSync(profileDir)) {
+    const files = walk(profileDir, (abs) =>
+      PLACEHOLDER_EXT.has(path.extname(abs)),
+    );
+    for (const abs of files) {
+      const posix = rel(abs);
+      if (!skipProductPlaceholderPath(posix)) {
+        fail(`${posix} must be skipped as profiles/ catalog`);
+      }
+    }
+  }
+
+  if (failures.length) {
+    for (const msg of failures) {
+      console.error(`error: placeholder self-test: ${msg}`);
+    }
+    console.error(
+      `check-harness: ${failures.length} error(s), 0 warning(s)`,
+    );
+    process.exit(1);
+  }
+  console.log("check-harness: placeholder self-test ok");
+  process.exit(0);
+}
+
+if (process.argv.includes("--self-test")) {
+  selfTestPlaceholders();
 }
 
 function checkSkills() {
