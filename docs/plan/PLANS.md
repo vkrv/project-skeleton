@@ -36,8 +36,9 @@ Per-task plans are **optional to commit**. Commit a plan when another session or
 | Feature docs (`docs/features/`) | User-visible behavior, status, open questions | The executable path for a single task |
 | ExecPlan (`docs/plan/exec/…`) | **How** this task gets done, with living progress and proof | Replacing the roadmap or the feature doc |
 | ADR (if the repo adopts them, typically under `docs/architecture/`) | Durable **architectural decisions** that outlive one task | A scratchpad for every in-task choice |
+| [MEMORY.md](../ai-harness/MEMORY.md) | Standing bugs, design, and functionality lessons that outlive one task | Harness convention history (that is [EVOLUTION-LOG.md](../ai-harness/EVOLUTION-LOG.md)) |
 
-When an ExecPlan decision should last (a boundary, a storage choice, a public API shape), promote it to an ADR (or the architecture doc that plays that role) and link it from the Decision Log. When the work ships, tick the matching ROADMAP checkbox and update the feature doc status. Do not treat the `exec/` folder as the product roadmap.
+When an ExecPlan decision should last (a boundary, a storage choice, a public API shape), promote it to an ADR (or the architecture doc that plays that role) and link it from the Decision Log. When a surprise or outcome should constrain later work, promote it to the matching [project memory](../ai-harness/MEMORY.md) category rather than leaving it only in this plan. When the work ships, tick the matching ROADMAP checkbox and update the feature doc status. Do not treat the `exec/` folder as the product roadmap.
 
 **Finished plans:** if the working notes are still useful, move the file to `docs/plan/exec/archive/` (same basename). If they are not, delete the file. Update [INDEX.md](../INDEX.md) only if you registered a specific plan there; the folder README is enough for the convention.
 
@@ -80,7 +81,7 @@ Example shape:
 
 ### Surprises & Discoveries
 
-Unexpected behavior, bugs, constraints, or insights that changed the approach. Attach short evidence (a test name, a command snippet, a file path).
+Unexpected behavior, bugs, constraints, or insights that changed the approach. Attach short evidence (a test name, a command snippet, a file path). If the surprise should constrain later work, add it to the matching [project memory](../ai-harness/MEMORY.md) category (`bugs`, `design`, or `functionality`) as well.
 
 ### Decision Log
 
@@ -94,7 +95,7 @@ Include reversals. If you change course, say why here and fix Progress so it sti
 
 ### Outcomes & Retrospective
 
-At each major milestone and at completion: what was achieved, what remains, what you would do differently, and how the result compares to Purpose.
+At each major milestone and at completion: what was achieved, what remains, what you would do differently, and how the result compares to Purpose. Promote lasting bugs, design choices, behaviour decisions, and rejected approaches to [MEMORY.md](../ai-harness/MEMORY.md); do not leave them only in this file.
 
 ### Context and Orientation
 
@@ -116,7 +117,7 @@ This repo’s definition of done is the default evidence bar:
 
 - Run `pnpm check` (or `pnpm turbo run test --filter <pkg>` while iterating) and **report the command and its result**.
 - New behavior has tests that can fail; a bug fix has a regression test.
-- Docs, `docs/INDEX.md`, and `docs/plan/ROADMAP.md` updated when relevant; EVOLUTION-LOG when a convention changed.
+- Docs, `docs/INDEX.md`, and `docs/plan/ROADMAP.md` updated when relevant; EVOLUTION-LOG when a convention changed; [MEMORY.md](../ai-harness/MEMORY.md) when a bug, design, or behaviour lesson should outlive this plan.
 - UI changes include visual proof of the affected flow, not only a static screenshot of the happy path.
 
 If the change is internal, still show impact: a test that fails before and passes after, plus a scenario that uses the new behavior. State the exact commands and how to tell success from failure.

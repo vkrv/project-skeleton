@@ -13,6 +13,7 @@ Always-on protocol lives in [AGENTS.md](../../AGENTS.md) (mandatory, including n
 | `.cursor/rules/*.mdc` | Cursor |
 | `profiles/*` | not loaded until copied into `.cursor/rules/` |
 | `docs/plan/PLANS.md` | Agents, via the AGENTS.md ExecPlan trigger |
+| `docs/ai-harness/MEMORY.md` | Agents, via the AGENTS.md project-memory note (not auto-loaded) |
 | `.agents/skills/*/SKILL.md` | Cursor, Codex, GitHub Copilot (native). Claude Code via `.claude/skills` symlink |
 
 ## Prefer promoting patterns
@@ -22,13 +23,16 @@ Always-on protocol lives in [AGENTS.md](../../AGENTS.md) (mandatory, including n
 | Same instruction given 2+ times | Add/update `AGENTS.md` (always-on) or a `.cursor/rules/*.mdc` (glob/stack) |
 | Stack choice becomes reusable | Add or extend a folder under `profiles/` |
 | Docs shape drifts | Fix `docs/INDEX.md` template + AGENTS.md docs conventions |
+| Bug, design, or behaviour lesson worth keeping | Add a newest-first entry under [MEMORY.md](MEMORY.md); promote a distilled rule only if it is now a convention |
 | Tooling script pattern stabilizes | Update root `package.json` / CI / `packages/config` |
 
 ## Do not
 
 - Encode one product’s domain into core rules or profiles meant for reuse
 - Skip EVOLUTION-LOG / RULES-INDEX when changing guidance files
+- Mix product bugs, UI/design, or behaviour lessons into EVOLUTION-LOG (those belong in [MEMORY.md](MEMORY.md))
 - Duplicate always-on protocol into Cursor `.mdc` files (keep a pointer, not a second copy)
+- Paste memory-log content into `AGENTS.md` or always-on rules (promote a distilled rule instead)
 
 After changing rules, profiles, skills, or harness docs, run `pnpm check:harness`.
 

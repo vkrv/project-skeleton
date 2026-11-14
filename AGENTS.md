@@ -56,11 +56,14 @@ This table is the **canonical** agent-facing map (update it when you add apps or
 - [docs/architecture/monorepo.md](docs/architecture/monorepo.md) — layout and pnpm 11 workspace settings
 - [docs/architecture/env.md](docs/architecture/env.md) — environment variables
 - [docs/ai-harness/RULES-INDEX.md](docs/ai-harness/RULES-INDEX.md) — guidance file registry
-- [docs/ai-harness/EVOLUTION-LOG.md](docs/ai-harness/EVOLUTION-LOG.md) — convention change history
+- [docs/ai-harness/EVOLUTION-LOG.md](docs/ai-harness/EVOLUTION-LOG.md) — harness convention history
+- [docs/ai-harness/MEMORY.md](docs/ai-harness/MEMORY.md) — standing project memory (bugs, design, functionality)
 
 ### Docs conventions
 
 **INDEX is canonical.** Update `docs/INDEX.md` whenever adding or changing any doc. Feature docs (`docs/features/*.md`) include **Status** (planned | in-progress | shipped), **Related**, and **Open questions**. Living plan: `PLAN.md` + `docs/plan/ROADMAP.md`. Cross-link with relative markdown links.
+
+**Project memory.** Before starting work in an area, read the matching category in [MEMORY.md](docs/ai-harness/MEMORY.md) (`memory/bugs.md`, `design.md`, `functionality.md`). After a bug fix or a decision worth keeping, add a newest-first dated entry there and prune obsolete Standing bullets. Harness changes stay in EVOLUTION-LOG. Do not paste logs into this file — promote a distilled rule instead.
 
 ### ExecPlans
 
@@ -75,7 +78,7 @@ pnpm install
 
 # Quality
 pnpm check         # harness + build + typecheck + lint + test
-pnpm check:harness # rules index, skills, links, placeholders, evolution log, ExecPlans
+pnpm check:harness # rules index, skills, links, placeholders, evolution log, project memory, ExecPlans
 pnpm build
 pnpm lint
 pnpm typecheck
@@ -95,7 +98,7 @@ Not done without evidence. Missing verification is not a successful fix.
 - Run `pnpm check` (or `pnpm turbo run test --filter <pkg>` while iterating). Report the command and its result — do not assert green without that output.
 - Add a regression test for every bug fix.
 - Mirrored logic (TypeScript + native, server + client, worker + API) must land in the same commit or PR, with the same regression test in each implementation. One-sided landings are not allowed; if a side cannot change yet, record a tracked follow-up.
-- Update docs, [docs/INDEX.md](docs/INDEX.md), and [docs/plan/ROADMAP.md](docs/plan/ROADMAP.md) when relevant; append [EVOLUTION-LOG.md](docs/ai-harness/EVOLUTION-LOG.md) when a convention changed.
+- Update docs, [docs/INDEX.md](docs/INDEX.md), and [docs/plan/ROADMAP.md](docs/plan/ROADMAP.md) when relevant; append [EVOLUTION-LOG.md](docs/ai-harness/EVOLUTION-LOG.md) when a convention changed; record lasting bug, design, or behaviour lessons in [MEMORY.md](docs/ai-harness/MEMORY.md).
 - For UI changes, provide visual evidence (screenshot or recording of the affected flow).
 
 ## Testing
@@ -155,7 +158,7 @@ When a pattern emerges that should be a convention, **update the harness immedia
 ### How to evolve
 
 1. Always-on protocol → this file. Glob-scoped or stack-specific → add/update `.cursor/rules/*.mdc` (copy from `profiles/` when adopting a stack). On-demand procedure → `.agents/skills/<slug>/SKILL.md`
-2. Append to `docs/ai-harness/EVOLUTION-LOG.md` (date, trigger, rule, rationale)
+2. Append to `docs/ai-harness/EVOLUTION-LOG.md` (date, trigger, rule, rationale). Product bugs, design, and behaviour lessons go in [MEMORY.md](docs/ai-harness/MEMORY.md), not that log.
 3. Update `docs/ai-harness/RULES-INDEX.md` when guidance files change (including `.agents/skills`)
 4. Run `pnpm check:harness` and fix any errors
 5. This repo is the canonical template — when improving the harness from a product monorepo, **push product-agnostic changes here** so the next project benefits

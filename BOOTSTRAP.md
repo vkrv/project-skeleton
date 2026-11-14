@@ -59,6 +59,8 @@ For each copied profile:
 | YYYY-MM-DD | Bootstrap | — | Project initialized from universal skeleton |
 ```
 
+Product bugs, design, and behaviour lessons go in [docs/ai-harness/MEMORY.md](docs/ai-harness/MEMORY.md), not that log. Category stubs under `docs/ai-harness/memory/` are ready; replace the example lines when the first real entries land.
+
 ## Done
 
 Agents should start at [AGENTS.md](AGENTS.md). Product features go under `docs/features/` with INDEX + ROADMAP updates per the docs conventions in AGENTS.md.
