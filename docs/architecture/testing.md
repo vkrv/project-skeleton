@@ -23,7 +23,7 @@ pnpm check:harness  # deterministic AI-harness self-check (stdlib only)
 pnpm check          # harness + build + typecheck + lint + test
 ```
 
-CI (`.github/workflows/ci.yml`) runs the harness self-check, then install → build → typecheck → lint → test on every push/PR.
+CI (`.github/workflows/ci.yml`) runs the harness self-check and its placeholder `--self-test`, then install → build → typecheck → lint → test on every push/PR.
 
 ### Harness self-check
 
@@ -37,9 +37,18 @@ CI (`.github/workflows/ci.yml`) runs the harness self-check, then install → bu
 - `AGENTS.md` stays under 32 KiB (warning past ~200 lines)
 - Evolution-log dates are non-decreasing
 - ExecPlan files under `docs/plan/exec/` (except `_template.md` and `README.md`) include every mandatory section heading from [PLANS.md](../plan/PLANS.md)
-- When `HARNESS_MODE=product`, leftover bootstrap placeholders fail the gate. Default / template mode allows them. JSX style objects are ignored.
+- When `HARNESS_MODE=product`, leftover ALL-CAPS bootstrap mustache tokens fail the gate. Default / template mode allows them. Unadopted packs under `profiles/` are skipped (catalog); adopted copies in `.cursor/rules/` are still scanned. JSX/style object literals and GitHub Actions `${{ }}` expressions are ignored.
+- `node scripts/check-harness.mjs --self-test` (also part of `pnpm check:harness`) asserts those skip/match rules against the catalog fixture. Stdlib only; keep it in CI — it is cheap.
 
-Run it after editing rules, profiles, or harness docs. After bootstrap, set `HARNESS_MODE=product` in CI so leftover placeholders fail the gate.
+Run it after editing rules, profiles, or harness docs.
+
+On this skeleton, a product-mode dry-run is expected to fail on **core** bootstrap tokens (for example `AGENTS.md`, `README.md`) and must **not** list files under `profiles/`:
+
+```bash
+HARNESS_MODE=product node scripts/check-harness.mjs
+```
+
+Do not set `HARNESS_MODE=product` in this template’s CI. After bootstrap, set it on the harness step as in [BOOTSTRAP.md](../../BOOTSTRAP.md); that run should pass once core tokens are gone.
 
 ## Fast loop (per package)
 

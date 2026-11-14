@@ -40,6 +40,7 @@ Copy only what you need from [`profiles/`](profiles/). See [profiles/README.md](
 For each copied profile:
 
 - [ ] Copy `.mdc` into `.cursor/rules/`
+- [ ] Fill pack-specific ALL-CAPS mustache tokens in the copied `.cursor/rules/` file (see the pack README)
 - [ ] Append a row under **Adopted profiles / product rules** in `docs/ai-harness/RULES-INDEX.md` (keep Optional as catalog only)
 - [ ] Append a line to `docs/ai-harness/EVOLUTION-LOG.md`
 
@@ -59,8 +60,24 @@ For each copied profile:
 | YYYY-MM-DD | Bootstrap | — | Project initialized from universal skeleton |
 ```
 
+## 6. Enable the product-mode placeholder gate
+
+This skeleton omits `HARNESS_MODE` so leftover bootstrap tokens are allowed. After they are gone from core files, turn the gate on as a normal last bootstrap step:
+
+- [ ] Set `HARNESS_MODE=product` in CI so `pnpm check:harness` fails on leftovers
+
+**Where to set it:** GitHub Actions `env` on the harness step or the `check` job in `.github/workflows/ci.yml` (this template does **not** set it):
+
+```yaml
+- run: node scripts/check-harness.mjs
+  env:
+    HARNESS_MODE: product
+```
+
+Locally: `HARNESS_MODE=product pnpm check:harness`. The variable is listed in [docs/architecture/env.md](docs/architecture/env.md).
+
+Unadopted packs under `profiles/` are a catalog and are **not** scanned. When you copy a pack into `.cursor/rules/`, fill that pack’s ALL-CAPS mustache tokens in the **copied** file (see the pack README). Adopted copies are scanned.
+
 ## Done
 
 Agents should start at [AGENTS.md](AGENTS.md). Product features go under `docs/features/` with INDEX + ROADMAP updates per the docs conventions in AGENTS.md.
-
-After placeholders are replaced, set `HARNESS_MODE=product` in CI so `pnpm check:harness` fails on leftovers.

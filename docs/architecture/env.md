@@ -19,6 +19,6 @@ Document **names only** here. Never commit secrets. Use `.env` locally (gitignor
 
 | Name | Used by | Required | Description |
 |------|---------|----------|-------------|
-| `HARNESS_MODE` | `pnpm check:harness` | no | Set to `product` after bootstrap so leftover placeholders fail. Omit (or `template`) in this skeleton. |
+| `HARNESS_MODE` | `pnpm check:harness` | no | Set to `product` after bootstrap (CI `env` on the harness step or job, or a local export) so leftover placeholders fail. Omit (or `template`) in this skeleton. Product mode skips `profiles/` (unadopted catalog); adopted copies in `.cursor/rules/` are still scanned. |
 
 Add rows as apps introduce new config. Do not put values in this doc.

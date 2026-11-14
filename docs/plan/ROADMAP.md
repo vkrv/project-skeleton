@@ -10,6 +10,7 @@ This file is delivery checkboxes, not an implementation plan. Multi-step tasks u
 - [ ] Fill tech-stack pins and AGENTS.md project context (phase, map)
 - [ ] Copy optional profiles from `profiles/` as needed
 - [ ] First app under `apps/` + `pnpm check` green
+- [ ] Enable `HARNESS_MODE=product` in CI after core placeholders are replaced
 
 ## Phase 1 — Core product
 

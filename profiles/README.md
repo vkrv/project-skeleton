@@ -6,10 +6,11 @@ These folders are **not active** until you copy their rules into the new project
 
 1. Choose the profile(s) that match your stack.
 2. Copy the `.mdc` file(s) into `.cursor/rules/`.
-3. Append a row under **Adopted profiles / product rules** in `docs/ai-harness/RULES-INDEX.md` (keep Optional as catalog only).
-4. Append a line to `docs/ai-harness/EVOLUTION-LOG.md` (date, trigger: “Adopted X profile”, rule file, rationale).
-5. Update `docs/architecture/tech-stack.md` with real version pins.
-6. Adjust the `AGENTS.md` monorepo map (canonical) if the profile implies new packages (e.g. `packages/db`, `apps/server`).
+3. Fill any ALL-CAPS mustache tokens the pack documents in the copied `.cursor/rules/` file (product-mode `check-harness` scans those copies, not this catalog).
+4. Append a row under **Adopted profiles / product rules** in `docs/ai-harness/RULES-INDEX.md` (keep Optional as catalog only).
+5. Append a line to `docs/ai-harness/EVOLUTION-LOG.md` (date, trigger: “Adopted X profile”, rule file, rationale).
+6. Update `docs/architecture/tech-stack.md` with real version pins.
+7. Adjust the `AGENTS.md` monorepo map (canonical) if the profile implies new packages (e.g. `packages/db`, `apps/server`).
 
 ## Profiles
 
