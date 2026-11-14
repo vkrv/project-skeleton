@@ -37,7 +37,11 @@ See [features/README.md](features/README.md) for the feature doc template.
 | [AGENTS.md](../AGENTS.md) | Always-on agent protocol (canonical map, phase, docs, testing, rule evolution) |
 | [CLAUDE.md](../CLAUDE.md) | Claude Code import of AGENTS.md |
 | [ai-harness/RULES-INDEX.md](ai-harness/RULES-INDEX.md) | Guidance file registry (which tools load what), including Agent Skills |
-| [ai-harness/EVOLUTION-LOG.md](ai-harness/EVOLUTION-LOG.md) | Rule change history |
+| [ai-harness/EVOLUTION-LOG.md](ai-harness/EVOLUTION-LOG.md) | Harness / convention change history |
+| [ai-harness/MEMORY.md](ai-harness/MEMORY.md) | Project memory index and rules (bugs, design, functionality) |
+| [ai-harness/memory/bugs.md](ai-harness/memory/bugs.md) | Root causes, failed fixes, regressions to guard against |
+| [ai-harness/memory/design.md](ai-harness/memory/design.md) | UI/UX and visual decisions |
+| [ai-harness/memory/functionality.md](ai-harness/memory/functionality.md) | Product behaviour and domain decisions |
 | [ai-harness/harness-self-improvement.md](ai-harness/harness-self-improvement.md) | Keep rules/tooling/docs harness improving over time |
 | [`.agents/skills/`](../.agents/skills/) | Cross-tool Agent Skills (`SKILL.md` playbooks); listed in RULES-INDEX |
 | [profiles/README.md](../profiles/README.md) | Optional stack packs (copy when adopted); `git-submodule` is opt-in, not core |

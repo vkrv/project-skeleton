@@ -12,6 +12,11 @@
  * and that .claude/skills is a symlink to that folder. ExecPlan files under
  * docs/plan/exec/ (except _template.md and README.md) must include every
  * mandatory section heading from docs/plan/PLANS.md.
+ *
+ * Project memory lives in docs/ai-harness/MEMORY.md and
+ * docs/ai-harness/memory/*.md (Standing heading; dated entries newest-first).
+ * EVOLUTION-LOG date order remains non-decreasing. Memory checks are
+ * standalone functions, separate from product-mode placeholder scanning.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -454,6 +459,96 @@ function checkEvolutionLog() {
   }
 }
 
+const MEMORY_INDEX = path.join(ROOT, "docs", "ai-harness", "MEMORY.md");
+const MEMORY_DIR = path.join(ROOT, "docs", "ai-harness", "memory");
+
+/** Dated entry lines in memory category files (headings, tables, or list items). */
+function parseMemoryEntryDates(text) {
+  const dates = [];
+  for (const line of text.split("\n")) {
+    const m = line.match(
+      /^(?:#{2,6}\s+|\|\s+|[-*]\s+\*{0,2})(\d{4}-\d{2}-\d{2})\b/,
+    );
+    if (m) dates.push(m[1]);
+  }
+  return dates;
+}
+
+function referencedPathsFromMemoryIndex(indexText, indexAbs) {
+  const paths = [];
+  for (const href of extractHrefs(indexText)) {
+    if (skipHref(href)) continue;
+    let decoded;
+    try {
+      decoded = decodeURIComponent(href.split("#")[0].split("?")[0]);
+    } catch {
+      error(`docs/ai-harness/MEMORY.md: malformed link ${href}`);
+      continue;
+    }
+    if (!decoded) continue;
+    paths.push({
+      href,
+      target: path.resolve(path.dirname(indexAbs), decoded),
+    });
+  }
+  return paths;
+}
+
+function checkMemoryIndexReferences(refs) {
+  for (const { href, target } of refs) {
+    if (!insideRepo(target)) {
+      error(`docs/ai-harness/MEMORY.md: relative link escapes repo: ${href}`);
+      continue;
+    }
+    if (!fs.existsSync(target)) {
+      error(`docs/ai-harness/MEMORY.md: referenced file missing: ${href}`);
+    }
+  }
+}
+
+function checkMemoryCategoryFiles(refs) {
+  if (!fs.existsSync(MEMORY_DIR)) {
+    error("docs/ai-harness/memory/ is missing");
+    return;
+  }
+  const files = walk(MEMORY_DIR, (abs) => abs.endsWith(".md"));
+  if (files.length === 0) {
+    error("docs/ai-harness/memory/ has no category markdown files");
+    return;
+  }
+  const referenced = new Set(refs.map(({ target }) => path.resolve(target)));
+  for (const abs of files) {
+    const posix = rel(abs);
+    if (!referenced.has(path.resolve(abs))) {
+      error(`${posix}: not referenced from docs/ai-harness/MEMORY.md`);
+    }
+    const text = read(abs);
+    const titles = text.split("\n").map(headingTitle).filter(Boolean);
+    if (!titles.some((title) => headingCovers(title, "Standing"))) {
+      error(`${posix}: missing Standing heading`);
+    }
+    let last = null;
+    for (const day of parseMemoryEntryDates(text)) {
+      if (last && day > last) {
+        error(
+          `${posix}: memory entry dates must be newest-first (non-increasing): ${day} follows ${last}`,
+        );
+      }
+      last = day;
+    }
+  }
+}
+
+function checkProjectMemory() {
+  if (!fs.existsSync(MEMORY_INDEX)) {
+    error("docs/ai-harness/MEMORY.md is missing");
+    return;
+  }
+  const refs = referencedPathsFromMemoryIndex(read(MEMORY_INDEX), MEMORY_INDEX);
+  checkMemoryIndexReferences(refs);
+  checkMemoryCategoryFiles(refs);
+}
+
 checkRulesIndex();
 checkFrontmatter();
 checkSkills();
@@ -461,6 +556,7 @@ checkLinks();
 checkAgentsSize();
 checkPlaceholders();
 checkEvolutionLog();
+checkProjectMemory();
 checkExecPlans();
 
 for (const w of warnings) console.warn(`warn: ${w}`);

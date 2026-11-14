@@ -15,6 +15,8 @@ Timestamp completed items in UTC. Split anything half-finished into done vs rema
 
 ## Surprises & Discoveries
 
+Promote lasting lessons to [MEMORY.md](../../ai-harness/MEMORY.md) (`bugs` / `design` / `functionality`).
+
 - Observation: …
   Evidence: …
 
@@ -26,7 +28,7 @@ Timestamp completed items in UTC. Split anything half-finished into done vs rema
 
 ## Outcomes & Retrospective
 
-Fill at each major milestone and at completion. Compare the result to Purpose. Note gaps and lessons.
+Fill at each major milestone and at completion. Compare the result to Purpose. Note gaps and lessons. If a decision should survive this plan, record it in [project memory](../../ai-harness/MEMORY.md) (or an ADR) and link it here.
 
 ## Context and Orientation
 
@@ -49,7 +51,7 @@ Observable behavior, not “files exist.” Default evidence bar (definition of 
 
 - `pnpm check` (or filtered `pnpm turbo run test --filter <pkg>` while iterating) — record the command and its result
 - Tests for new behavior; regression test for every bug fix
-- Docs / INDEX / ROADMAP / EVOLUTION-LOG when those apply
+- Docs / INDEX / ROADMAP / EVOLUTION-LOG / MEMORY when those apply
 - UI: visual proof of the affected flow, including an edge or error path if you touched one
 
 Name the exact commands, expected outputs, and how a novice tells success from failure.
