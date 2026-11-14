@@ -35,14 +35,17 @@ CI (`.github/workflows/ci.yml`) runs the harness self-check and its placeholder 
 - `.claude/skills` is a symlink to `.agents/skills` (Claude Code does not load `.agents/skills`; do not duplicate skill files)
 - Relative markdown links in `AGENTS.md`, `BOOTSTRAP.md`, `README.md`, `docs/`, `profiles/`, and `.agents/skills/` resolve
 - `AGENTS.md` stays under 32 KiB (warning past ~200 lines)
-- Evolution-log dates are non-decreasing
+- Evolution-log dates are non-decreasing (oldest first)
+- `docs/ai-harness/MEMORY.md` exists, and relative files it references exist
+- Each `docs/ai-harness/memory/*.md` file has a Standing heading
+- Dated entries in those memory category files are newest-first (non-increasing dates)
 - ExecPlan files under `docs/plan/exec/` (except `_template.md` and `README.md`) include every mandatory section heading from [PLANS.md](../plan/PLANS.md)
 - When `HARNESS_MODE=product`, leftover ALL-CAPS bootstrap mustache tokens fail the gate. Default / template mode allows them. Unadopted packs under `profiles/` are skipped (catalog); adopted copies in `.cursor/rules/` are still scanned. JSX/style object literals and GitHub Actions `${{ }}` expressions are ignored.
 - `node scripts/check-harness.mjs --self-test` (also part of `pnpm check:harness`) asserts those skip/match rules against the catalog fixture. Stdlib only; keep it in CI — it is cheap.
 
 Run it after editing rules, profiles, or harness docs.
 
-On this skeleton, a product-mode dry-run is expected to fail on **core** bootstrap tokens (for example `AGENTS.md`, `README.md`) and must **not** list files under `profiles/`:
+On this skeleton, a product-mode dry-run is expected to fail on **core** bootstrap tokens (for example `AGENTS.md`, `README.md`) and must **not** list files under `profiles/` or project-memory stubs:
 
 ```bash
 HARNESS_MODE=product node scripts/check-harness.mjs

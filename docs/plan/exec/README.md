@@ -29,7 +29,7 @@ This folder is not the product roadmap. Do not register every plan in [INDEX.md]
 When the task is done:
 
 1. Tick ROADMAP / feature-doc status if those apply.
-2. Promote lasting architectural choices to an ADR (or the architecture doc that serves that role); leave a link in the Decision Log.
+2. Promote lasting architectural choices to an ADR (or the architecture doc that serves that role); leave a link in the Decision Log. Promote standing bugs, design, and behaviour lessons to [MEMORY.md](../../ai-harness/MEMORY.md).
 3. Either **move** the file to `archive/` (same basename) if the notes are still useful, or **delete** it if they are not.
 
 Create `archive/` on first use; it does not need to exist empty.

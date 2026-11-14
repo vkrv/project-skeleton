@@ -13,9 +13,10 @@ Canonical list: **Definition of done** in [AGENTS.md](../../../AGENTS.md). Comma
 2. **Tests:** Every bug fix needs a regression test. New logic needs tests per testing.md. Do not add no-op `test` scripts.
 3. **Parity:** If the change touches logic that exists in more than one implementation, list each mirrored implementation and the regression test that covers it. If a side could not be updated, cite the tracked follow-up. Do not claim done with an untracked split.
 4. **Docs:** Update docs, [INDEX.md](../../../docs/INDEX.md), and [ROADMAP.md](../../../docs/plan/ROADMAP.md) when relevant. Convention change → [EVOLUTION-LOG.md](../../../docs/ai-harness/EVOLUTION-LOG.md). If this work has an ExecPlan under `docs/plan/exec/`, update Progress and Validation so the plan still matches reality ([PLANS.md](../../../docs/plan/PLANS.md)).
-5. **UI:** If web UI, layout, routing, or client state changed, exercise the flow (not a single screenshot). If no browser is available, say what substitute you used (tests, curl) and what you could not verify.
-6. **Harness:** If you touched AGENTS.md, rules, profiles, skills, or harness docs, `pnpm check:harness` must be green.
+5. **Memory:** If this was a bug fix, a rejected approach, or a design/functionality decision worth keeping, add a newest-first dated entry in the matching file under [MEMORY.md](../../../docs/ai-harness/MEMORY.md) (`memory/bugs.md`, `design.md`, `functionality.md`) and prune Standing if needed. Do not mix those lessons into EVOLUTION-LOG.
+6. **UI:** If web UI, layout, routing, or client state changed, exercise the flow (not a single screenshot). If no browser is available, say what substitute you used (tests, curl) and what you could not verify.
+7. **Harness:** If you touched AGENTS.md, rules, profiles, skills, or harness docs, `pnpm check:harness` must be green.
 
 ## Report
 
-In the PR or handoff include: commands run + outcomes, tests added, mirrored implementations (or N/A), docs touched, and UI evidence or an explicit gap. Do not merge from this skill.
+In the PR or handoff include: commands run + outcomes, tests added, mirrored implementations (or N/A), docs touched, memory entries (or N/A), and UI evidence or an explicit gap. Do not merge from this skill.

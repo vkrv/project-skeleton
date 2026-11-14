@@ -60,6 +60,8 @@ For each copied profile:
 | YYYY-MM-DD | Bootstrap | — | Project initialized from universal skeleton |
 ```
 
+Product bugs, design, and behaviour lessons go in [docs/ai-harness/MEMORY.md](docs/ai-harness/MEMORY.md), not that log. Category stubs under `docs/ai-harness/memory/` are ready; replace the example lines when the first real entries land.
+
 ## 6. Enable the product-mode placeholder gate
 
 This skeleton omits `HARNESS_MODE` so leftover bootstrap tokens are allowed. After they are gone from core files, turn the gate on as a normal last bootstrap step:

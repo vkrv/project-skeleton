@@ -16,8 +16,8 @@ Protocol: **Rule evolution (MANDATORY)** in [AGENTS.md](../../../AGENTS.md). Ind
    - On-demand procedure → `.agents/skills/<slug>/SKILL.md`, not always-on text
 2. Edit the file(s). Do not duplicate always-on protocol into `.mdc` files.
 3. Update RULES-INDEX when guidance files are added or removed (every `.mdc` and every `.agents/skills/*/SKILL.md` must be listed).
-4. Append one row to [EVOLUTION-LOG.md](../../../docs/ai-harness/EVOLUTION-LOG.md): date, trigger, rule/doc, rationale. Keep existing rows. Dates must be non-decreasing. Stay **neutral** — no product or private repo names.
-5. New doc → register in [docs/INDEX.md](../../../docs/INDEX.md). Feature work also updates ROADMAP.
+4. Append one row to [EVOLUTION-LOG.md](../../../docs/ai-harness/EVOLUTION-LOG.md): date, trigger, rule/doc, rationale. Keep existing rows. Dates must be non-decreasing. Stay **neutral** — no product or private repo names. Product bugs, UI/design, and behaviour lessons belong in [MEMORY.md](../../../docs/ai-harness/MEMORY.md) (`memory/bugs.md`, `design.md`, `functionality.md`), not this log.
+5. New doc → register in [docs/INDEX.md](../../../docs/INDEX.md). Feature work also updates ROADMAP. New memory category files must be linked from MEMORY.md.
 6. Version pin change → [tech-stack.md](../../../docs/architecture/tech-stack.md) + EVOLUTION-LOG.
 7. Run `pnpm check:harness` and fix errors. Behavior change → tests + **definition of done**.
 8. Product-agnostic improvements belong in this template so the next project inherits them.
